@@ -1,87 +1,120 @@
 /**
- * Backfills thumbnail URLs for all existing Notion entries.
- * Run once: node scripts/backfill-thumbnails.mjs <TOKEN> <RESOURCES_DB> <BLOG_DB>
+ * Backfills thumbnail images for all Notion entries using the Pexels API.
+ * Searches by content title for relevant, specific images.
+ *
+ * Usage:
+ *   node scripts/backfill-thumbnails.mjs <NOTION_TOKEN> <RESOURCES_DB> <BLOG_DB> <PEXELS_API_KEY>
  */
 
-const [token, resourcesDb, blogDb] = process.argv.slice(2);
-if (!token || !resourcesDb || !blogDb) {
-  console.error('Usage: node scripts/backfill-thumbnails.mjs <TOKEN> <RESOURCES_DB> <BLOG_DB>');
+const [notionToken, resourcesDb, blogDb, pexelsKey] = process.argv.slice(2);
+if (!notionToken || !resourcesDb || !blogDb) {
+  console.error('Usage: node scripts/backfill-thumbnails.mjs <NOTION_TOKEN> <RESOURCES_DB> <BLOG_DB> [PEXELS_API_KEY]');
   process.exit(1);
 }
 
-const headers = {
-  Authorization: `Bearer ${token}`,
+const notionHeaders = {
+  Authorization: `Bearer ${notionToken}`,
   'Notion-Version': '2022-06-28',
   'Content-Type': 'application/json',
 };
 
+// ── Pexels image fetch ───────────────────────────────────────────────────────
+async function fetchPexelsImage(query) {
+  if (!pexelsKey) return null;
+  try {
+    const res = await fetch(
+      `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=3&orientation=landscape`,
+      { headers: { Authorization: pexelsKey } }
+    );
+    const data = await res.json();
+    if (!data.photos?.length) return null;
+    const photo = data.photos[0];
+    return photo.src.large2x ?? photo.src.large ?? photo.src.original;
+  } catch {
+    return null;
+  }
+}
+
+// ── Fallback: category-based Unsplash images ─────────────────────────────────
 const BASE = 'https://images.unsplash.com/photo-';
 const P = '?w=800&q=80&fit=crop&h=450&auto=format';
 const u = (id) => `${BASE}${id}${P}`;
 
-const RESOURCE_THUMBNAILS = {
-  ChatGPT:     [u('1677442135703-59657440c3db'), u('1620712943543-bcc4688e7485'), u('1526374965328-7f61d4dc18c5'), u('1655720031546-cd6c6f12b0e4'), u('1488229297570-58520851e868')],
-  Claude:      [u('1635070041078-e363dbe005cb'), u('1618005182384-a83a8bd57fbe'), u('1519389950473-47ba0277781c'), u('1580927752452-89d86da3fa0a'), u('1635070041040-42f60da3c5c3')],
-  Content:     [u('1455390582262-044cdead277a'), u('1499951360447-b19be8fe80f5'), u('1542435503-4c6c8a5b4b1a'), u('1471107340929-a87cd0f5b5f3'), u('1432888498266-38ffec3eaf0a')],
-  Productivity:[u('1484480974693-6ca0a78fb36b'), u('1507238691740-187a5b1d37b8'), u('1498050108023-c5249f4df085'), u('1545987796-200677720183'), u('1517694712202-14dd9538aa97')],
-  Business:    [u('1460925895917-afdab827c52f'), u('1507003211169-0a1dd7228f2d'), u('1486406146926-c627a92ad1ab'), u('1664575599736-c5197c684128'), u('1553729459-efe14ef6055d')],
-  Tools:       [u('1518770660439-4636190af475'), u('1504868584819-f8e8b4b6d7e3'), u('1451187580459-43490279c0fa'), u('1558618666-fcd25c85cd64'), u('1581092580497-e0d23cbdf1dc')],
+const FALLBACKS = {
+  ChatGPT:            u('1677442135703-59657440c3db'),
+  Claude:             u('1635070041078-e363dbe005cb'),
+  Content:            u('1455390582262-044cdead277a'),
+  Productivity:       u('1484480974693-6ca0a78fb36b'),
+  Business:           u('1460925895917-afdab827c52f'),
+  Tools:              u('1518770660439-4636190af475'),
+  'Content Creation': u('1455390582262-044cdead277a'),
+  'AI Comparison':    u('1518770660439-4636190af475'),
+  Prompting:          u('1677442135703-59657440c3db'),
 };
 
-const BLOG_THUMBNAILS = {
-  'Content Creation': RESOURCE_THUMBNAILS.Content,
-  'AI Comparison':    RESOURCE_THUMBNAILS.Tools,
-  'Productivity':     RESOURCE_THUMBNAILS.Productivity,
-  'Prompting':        RESOURCE_THUMBNAILS.ChatGPT,
-  'Business':         RESOURCE_THUMBNAILS.Business,
-  'Tools':            RESOURCE_THUMBNAILS.Tools,
-};
-
-function pick(map, category, seed) {
-  const pool = map[category] ?? Object.values(map).flat();
-  const idx = seed.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % pool.length;
-  return pool[idx];
+function fallback(category) {
+  return FALLBACKS[category] ?? u('1518770660439-4636190af475');
 }
 
+// ── Notion helpers ───────────────────────────────────────────────────────────
 async function queryAll(dbId) {
   const res = await fetch(`https://api.notion.com/v1/databases/${dbId}/query`, {
-    method: 'POST', headers, body: JSON.stringify({ page_size: 100 }),
+    method: 'POST', headers: notionHeaders, body: JSON.stringify({ page_size: 100 }),
   });
   return (await res.json()).results ?? [];
 }
 
 async function updateThumbnail(pageId, url) {
-  await fetch(`https://api.notion.com/v1/pages/${pageId}`, {
+  const res = await fetch(`https://api.notion.com/v1/pages/${pageId}`, {
     method: 'PATCH',
-    headers,
+    headers: notionHeaders,
     body: JSON.stringify({
       properties: {
         Thumbnail: { rich_text: [{ text: { content: url } }] },
       },
     }),
   });
+  return res.ok;
 }
 
 function getText(props, key) {
   return props[key]?.rich_text?.[0]?.plain_text ?? props[key]?.title?.[0]?.plain_text ?? '';
 }
 
+// ── Build a good search query from a title ────────────────────────────────────
+function buildQuery(title, category) {
+  // Strip common filler words and add AI context
+  const clean = title
+    .replace(/\b(the|a|an|how|to|in|for|that|with|and|of|your|you|most|best|top|guide|pack|kit|template|toolkit|masterclass|complete|ultimate)\b/gi, '')
+    .replace(/[^a-zA-Z0-9 ]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .split(' ')
+    .slice(0, 5)
+    .join(' ');
+  return `${clean} AI technology`;
+}
+
+// ── Main ─────────────────────────────────────────────────────────────────────
 (async () => {
-  console.log('\n🖼️  Backfilling thumbnails...\n');
+  const mode = pexelsKey ? 'Pexels (relevant images)' : 'fallback (category images)';
+  console.log(`\n🖼️  Backfilling thumbnails using ${mode}...\n`);
 
   // Resources
   console.log('📦 Resources:');
   const resources = await queryAll(resourcesDb);
   for (const page of resources) {
     const props = page.properties;
-    const existing = getText(props, 'Thumbnail');
-    if (existing) { console.log(`  — skipped (already has image)`); continue; }
-    const slug = getText(props, 'Slug');
-    const category = props['Category']?.select?.name ?? 'Tools';
-    const url = pick(RESOURCE_THUMBNAILS, category, slug || page.id);
-    await updateThumbnail(page.id, url);
     const name = getText(props, 'Name');
+    const category = props['Category']?.select?.name ?? 'Tools';
+    const query = buildQuery(name, category);
+
+    let url = await fetchPexelsImage(query);
+    if (!url) url = fallback(category);
+
+    await updateThumbnail(page.id, url);
     console.log(`  ✓ ${name}`);
+    if (pexelsKey) await new Promise(r => setTimeout(r, 300)); // rate limit
   }
 
   // Blog posts
@@ -89,15 +122,17 @@ function getText(props, key) {
   const posts = await queryAll(blogDb);
   for (const page of posts) {
     const props = page.properties;
-    const existing = getText(props, 'Thumbnail');
-    if (existing) { console.log(`  — skipped (already has image)`); continue; }
-    const slug = getText(props, 'Slug');
-    const category = props['Category']?.select?.name ?? 'Tools';
-    const url = pick(BLOG_THUMBNAILS, category, slug || page.id);
-    await updateThumbnail(page.id, url);
     const name = getText(props, 'Name');
+    const category = props['Category']?.select?.name ?? 'Tools';
+    const query = buildQuery(name, category);
+
+    let url = await fetchPexelsImage(query);
+    if (!url) url = fallback(category);
+
+    await updateThumbnail(page.id, url);
     console.log(`  ✓ ${name}`);
+    if (pexelsKey) await new Promise(r => setTimeout(r, 300));
   }
 
-  console.log('\n✅ Done! Redeploy Vercel to see images live.\n');
+  console.log('\n✅ Done! Trigger a Vercel redeploy to see updated images.\n');
 })();

@@ -4,7 +4,22 @@
  * Even day-of-year = resource, odd = blog post.
  */
 
-const { ANTHROPIC_API_KEY, NOTION_TOKEN, NOTION_RESOURCES_DB, NOTION_BLOG_DB, VERCEL_DEPLOY_HOOK } = process.env;
+const { ANTHROPIC_API_KEY, NOTION_TOKEN, NOTION_RESOURCES_DB, NOTION_BLOG_DB, VERCEL_DEPLOY_HOOK, PEXELS_API_KEY } = process.env;
+
+// ── Pexels image fetch ───────────────────────────────────────────────────────
+async function fetchPexelsImage(title, category) {
+  if (!PEXELS_API_KEY) return null;
+  const clean = title.replace(/[^a-zA-Z0-9 ]/g, '').split(' ').slice(0, 5).join(' ');
+  const query = encodeURIComponent(`${clean} AI technology`);
+  try {
+    const res = await fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=3&orientation=landscape`, {
+      headers: { Authorization: PEXELS_API_KEY },
+    });
+    const data = await res.json();
+    if (!data.photos?.length) return null;
+    return data.photos[0].src.large2x ?? data.photos[0].src.large;
+  } catch { return null; }
+}
 
 // ── Thumbnail library ────────────────────────────────────────────────────────
 const BASE = 'https://images.unsplash.com/photo-';
@@ -142,7 +157,8 @@ Rules:
   };
   if (!data.free && data.price) props.Price = { number: data.price };
   if (data.tags?.length) props.Tags = { multi_select: data.tags.map((t) => ({ name: t })) };
-  props.Thumbnail = { rich_text: [{ text: { content: pickThumb(RESOURCE_THUMBNAILS, data.category, data.slug) } }] };
+  const thumb = await fetchPexelsImage(data.name, data.category) || pickThumb(RESOURCE_THUMBNAILS, data.category, data.slug);
+  props.Thumbnail = { rich_text: [{ text: { content: thumb } }] };
 
   await createNotionPage({ parent: { database_id: NOTION_RESOURCES_DB }, properties: props });
   console.log(`✓ Resource created: ${data.name}`);
@@ -193,7 +209,8 @@ Rules:
     Published: { date: { start: dateStr } },
   };
   if (data.tags?.length) props.Tags = { multi_select: data.tags.map((t) => ({ name: t })) };
-  props.Thumbnail = { rich_text: [{ text: { content: pickThumb(BLOG_THUMBNAILS, data.category, data.slug) } }] };
+  const thumb = await fetchPexelsImage(data.name, data.category) || pickThumb(BLOG_THUMBNAILS, data.category, data.slug);
+  props.Thumbnail = { rich_text: [{ text: { content: thumb } }] };
 
   await createNotionPage({ parent: { database_id: NOTION_BLOG_DB }, properties: props });
   console.log(`✓ Blog post created: ${data.name}`);
