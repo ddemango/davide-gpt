@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, ArrowRight, Tag } from 'lucide-react';
 import { getBlogPosts } from '@/lib/notion';
@@ -60,9 +61,16 @@ export default async function BlogPage() {
               <Card hover glow className="grid grid-cols-1 gap-6 md:grid-cols-2" padding="none">
                 {/* Thumbnail */}
                 <div className="h-64 md:h-full min-h-[280px] rounded-l-2xl md:rounded-r-none rounded-2xl bg-gradient-to-br from-brand-600/20 to-accent-600/20 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10 group-hover:from-brand-600/20 group-hover:to-accent-600/20 transition-all" />
-                  <Tag className="h-16 w-16 text-slate-600 relative z-10" aria-hidden="true" />
-                  <div className="absolute bottom-4 left-4">
+                  {featured.thumbnail ? (
+                    <Image src={featured.thumbnail} alt={featured.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 50vw" />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10 group-hover:from-brand-600/20 group-hover:to-accent-600/20 transition-all" />
+                      <Tag className="h-16 w-16 text-slate-600 relative z-10" aria-hidden="true" />
+                    </>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
+                  <div className="absolute bottom-4 left-4 z-20">
                     <Badge variant="brand" size="md">{featured.category}</Badge>
                   </div>
                 </div>
@@ -96,9 +104,16 @@ export default async function BlogPage() {
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group block h-full">
               <Card hover glow className="h-full flex flex-col">
                 <div className="h-44 rounded-xl bg-gradient-to-br from-surface-2 to-surface-3 mb-4 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10 group-hover:opacity-150 transition-all" />
-                  <Tag className="h-10 w-10 text-slate-600 relative z-10" aria-hidden="true" />
-                  <div className="absolute bottom-3 left-3">
+                  {post.thumbnail ? (
+                    <Image src={post.thumbnail} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10 transition-all" />
+                      <Tag className="h-10 w-10 text-slate-600 relative z-10" aria-hidden="true" />
+                    </>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                  <div className="absolute bottom-3 left-3 z-20">
                     <Badge variant="brand" size="sm">{post.category}</Badge>
                   </div>
                 </div>
