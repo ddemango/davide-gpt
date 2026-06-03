@@ -7,6 +7,7 @@
 
 import type { Resource, BlogPost } from '@/types';
 import { resources as staticResources, blogPosts as staticBlogPosts } from '@/lib/data';
+import { RESOURCE_THUMBNAILS, BLOG_THUMBNAILS, pickThumbnail } from '@/lib/thumbnails';
 
 // ---------------------------------------------------------------------------
 // Lazy-initialise the Notion client so the module can be imported on the
@@ -81,6 +82,10 @@ function mapResourcePage(page: NotionPage): Resource | null {
     const featured = props['Featured']?.checkbox ?? false;
     const publishedAt = props['Published']?.date?.start ?? new Date().toISOString().slice(0, 10);
 
+    const thumbnail =
+      richText(props['Thumbnail']?.rich_text) ||
+      pickThumbnail(RESOURCE_THUMBNAILS, category, slug);
+
     return {
       slug,
       title,
@@ -90,7 +95,7 @@ function mapResourcePage(page: NotionPage): Resource | null {
       type,
       isFree,
       price,
-      thumbnail: '',
+      thumbnail,
       downloadCount,
       tags,
       featured,
@@ -127,13 +132,17 @@ function mapBlogPage(page: NotionPage): (BlogPost & { notionId: string }) | null
     const featured = props['Featured']?.checkbox ?? false;
     const publishedAt = props['Published']?.date?.start ?? new Date().toISOString().slice(0, 10);
 
+    const thumbnail =
+      richText(props['Thumbnail']?.rich_text) ||
+      pickThumbnail(BLOG_THUMBNAILS, category, slug);
+
     return {
       notionId: page.id,
       slug,
       title,
       excerpt: richText(props['Excerpt']?.rich_text),
       category,
-      thumbnail: '',
+      thumbnail,
       publishedAt,
       readTime,
       tags,

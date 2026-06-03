@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Download, Lock, BookOpen, FileText, Video, Wrench, Layout, Search } from 'lucide-react';
 import Badge from '@/components/ui/Badge';
@@ -107,12 +108,25 @@ export default function ResourcesGrid({ resources }: Props) {
                 >
                   <Card hover glow className="h-full flex flex-col">
                     <div className="relative h-44 rounded-xl overflow-hidden bg-gradient-to-br from-surface-3 to-surface-2 mb-4 flex items-center justify-center">
-                      <div className="absolute inset-0 bg-gradient-to-br from-brand-600/20 to-accent-600/20" />
-                      <Icon className="h-12 w-12 text-brand-400 relative z-10" aria-hidden="true" />
-                      <div className="absolute top-3 left-3">
+                      {resource.thumbnail ? (
+                        <Image
+                          src={resource.thumbnail}
+                          alt={resource.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-br from-brand-600/20 to-accent-600/20" />
+                          <Icon className="h-12 w-12 text-brand-400 relative z-10" aria-hidden="true" />
+                        </>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                      <div className="absolute top-3 left-3 z-20">
                         <Badge variant="brand" size="sm">{resource.category}</Badge>
                       </div>
-                      <div className="absolute top-3 right-3">
+                      <div className="absolute top-3 right-3 z-20">
                         <Badge variant={resource.isFree ? 'free' : 'paid'} size="sm">
                           {resource.isFree ? '✦ Free' : `$${resource.price}`}
                         </Badge>

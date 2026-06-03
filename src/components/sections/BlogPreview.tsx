@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Clock, ArrowRight, Tag } from 'lucide-react';
@@ -46,9 +47,22 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
               <Card hover glow className="h-full flex flex-col">
                 {/* Thumbnail */}
                 <div className="h-44 rounded-xl bg-gradient-to-br from-surface-2 to-surface-3 border border-white/[0.04] mb-4 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10 group-hover:from-brand-600/20 group-hover:to-accent-600/20 transition-all" />
-                  <Tag className="h-10 w-10 text-slate-600 relative z-10" aria-hidden="true" />
-                  <div className="absolute bottom-3 left-3">
+                  {post.thumbnail ? (
+                    <Image
+                      src={post.thumbnail}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10 group-hover:from-brand-600/20 group-hover:to-accent-600/20 transition-all" />
+                      <Tag className="h-10 w-10 text-slate-600 relative z-10" aria-hidden="true" />
+                    </>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                  <div className="absolute bottom-3 left-3 z-20">
                     <Badge variant="brand" size="sm">{post.category}</Badge>
                   </div>
                 </div>
