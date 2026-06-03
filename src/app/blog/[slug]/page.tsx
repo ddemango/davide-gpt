@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, Clock, Tag, ArrowRight } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { blogPosts } from '@/lib/data';
+import { getBlogPostBySlug, getBlogPosts, getBlogPostContent } from '@/lib/notion';
 import { formatDate } from '@/lib/utils';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
@@ -10,6 +12,8 @@ import SectionWrapper from '@/components/ui/SectionWrapper';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
 import NewsletterCTA from '@/components/sections/NewsletterCTA';
 import { siteConfig } from '@/lib/data';
+
+export const revalidate = 3600;
 
 interface Props {
   params: { slug: string };
@@ -20,7 +24,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+  const post = await getBlogPostBySlug(params.slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -35,11 +39,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: Props) {
+  const [post, allPosts] = await Promise.all([
+    getBlogPostBySlug(params.slug),
+    getBlogPosts(),
+  ]);
   if (!post) notFound();
 
-  const related = blogPosts
+  // Fetch Notion markdown content if available
+  const notionContent = post.notionId
+    ? await getBlogPostContent(post.notionId)
+    : '';
+
+  const related = allPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
 
@@ -114,39 +126,45 @@ export default function BlogPostPage({ params }: Props) {
               <p className="absolute bottom-4 left-4 text-xs text-slate-600">[ Article hero image ]</p>
             </div>
 
-            {/* Placeholder article body */}
-            <div className="space-y-6 text-slate-300 leading-relaxed">
-              <p className="text-lg font-medium text-slate-200">
-                {post.excerpt}
-              </p>
-              <p>
-                AI tools are transforming the way we work, create, and communicate. In this article, we'll break down
-                everything you need to know about this topic — with practical, actionable steps you can start using today.
-              </p>
-              <h2 className="font-display text-2xl font-bold text-white pt-4">Why This Matters in 2024</h2>
-              <p>
-                The AI landscape changes rapidly. What worked six months ago may already be outdated. That's why staying
-                current isn't just a competitive advantage — it's a necessity for anyone serious about leveraging these tools.
-              </p>
-              <h2 className="font-display text-2xl font-bold text-white pt-4">Getting Started</h2>
-              <p>
-                You don't need any technical background to get value from this. Whether you're a complete beginner or someone
-                who's been experimenting with AI tools for a while, there's something here for you.
-              </p>
-              <p>
-                The key is to focus on practical applications rather than theory. Every concept here has a direct,
-                real-world use case that you can implement immediately.
-              </p>
-              <h2 className="font-display text-2xl font-bold text-white pt-4">The Bottom Line</h2>
-              <p>
-                AI tools like ChatGPT, Claude, and Gemini are not going away. In fact, they're getting more powerful
-                by the month. The question isn't whether to use them — it's how to use them effectively.
-              </p>
-              <p className="text-slate-400 italic border-l-4 border-brand-500 pl-4">
-                "The people who will thrive in the AI era are not those who resist it — they're those who learn to
-                work alongside it." — Davide
-              </p>
-            </div>
+            {/* Article body — Notion content or static placeholder */}
+            {notionContent ? (
+              <div className="prose-custom">
+                <ReactMarkdown>{notionContent}</ReactMarkdown>
+              </div>
+            ) : (
+              <div className="space-y-6 text-slate-300 leading-relaxed">
+                <p className="text-lg font-medium text-slate-200">
+                  {post.excerpt}
+                </p>
+                <p>
+                  AI tools are transforming the way we work, create, and communicate. In this article, we&apos;ll break down
+                  everything you need to know about this topic — with practical, actionable steps you can start using today.
+                </p>
+                <h2 className="font-display text-2xl font-bold text-white pt-4">Why This Matters in 2024</h2>
+                <p>
+                  The AI landscape changes rapidly. What worked six months ago may already be outdated. That&apos;s why staying
+                  current isn&apos;t just a competitive advantage — it&apos;s a necessity for anyone serious about leveraging these tools.
+                </p>
+                <h2 className="font-display text-2xl font-bold text-white pt-4">Getting Started</h2>
+                <p>
+                  You don&apos;t need any technical background to get value from this. Whether you&apos;re a complete beginner or someone
+                  who&apos;s been experimenting with AI tools for a while, there&apos;s something here for you.
+                </p>
+                <p>
+                  The key is to focus on practical applications rather than theory. Every concept here has a direct,
+                  real-world use case that you can implement immediately.
+                </p>
+                <h2 className="font-display text-2xl font-bold text-white pt-4">The Bottom Line</h2>
+                <p>
+                  AI tools like ChatGPT, Claude, and Gemini are not going away. In fact, they&apos;re getting more powerful
+                  by the month. The question isn&apos;t whether to use them — it&apos;s how to use them effectively.
+                </p>
+                <p className="text-slate-400 italic border-l-4 border-brand-500 pl-4">
+                  &ldquo;The people who will thrive in the AI era are not those who resist it — they&apos;re those who learn to
+                  work alongside it.&rdquo; — Davide
+                </p>
+              </div>
+            )}
 
             {/* Tags footer */}
             <div className="mt-12 pt-8 border-t border-white/[0.06] flex flex-wrap gap-2">

@@ -6,12 +6,15 @@ import {
   Users, Star, CheckCircle2, ArrowRight
 } from 'lucide-react';
 import { resources } from '@/lib/data';
+import { getResourceBySlug, getResources } from '@/lib/notion';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
 import NewsletterCTA from '@/components/sections/NewsletterCTA';
+
+export const revalidate = 3600;
 
 interface Props {
   params: { slug: string };
@@ -22,7 +25,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resource = resources.find((r) => r.slug === params.slug);
+  const resource = await getResourceBySlug(params.slug);
   if (!resource) return {};
   return {
     title: resource.title,
@@ -44,13 +47,16 @@ const whatYouGetItems = [
   'Access to the DavideGPT community for questions',
 ];
 
-export default function ResourcePage({ params }: Props) {
-  const resource = resources.find((r) => r.slug === params.slug);
+export default async function ResourcePage({ params }: Props) {
+  const [resource, allResources] = await Promise.all([
+    getResourceBySlug(params.slug),
+    getResources(),
+  ]);
   if (!resource) notFound();
 
-  const related = resources.filter(
-    (r) => r.slug !== resource.slug && r.category === resource.category
-  ).slice(0, 3);
+  const related = allResources
+    .filter((r) => r.slug !== resource.slug && r.category === resource.category)
+    .slice(0, 3);
 
   return (
     <>

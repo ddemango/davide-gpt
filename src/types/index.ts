@@ -25,6 +25,7 @@ export interface BlogPost {
   readTime: string;
   tags: string[];
   featured?: boolean;
+  notionId?: string;
   author: {
     name: string;
     avatar: string;

@@ -11,6 +11,9 @@ import FAQSection from '@/components/sections/FAQSection';
 import CTASection from '@/components/sections/CTASection';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
 import { faqItems } from '@/lib/data';
+import { getResources, getBlogPosts } from '@/lib/notion';
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: 'DavideGPT — Master AI. Own Your Future.',
@@ -19,18 +22,20 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [resources, blogPosts] = await Promise.all([getResources(), getBlogPosts()]);
+
   return (
     <>
       <SchemaMarkup type="faq" items={faqItems} />
       <HeroSection />
       <StatsSection />
-      <FeaturedResources />
+      <FeaturedResources resources={resources} />
       <HowItWorks />
       <AboutSection />
       <TestimonialsSection />
       <NewsletterCTA />
-      <BlogPreview />
+      <BlogPreview posts={blogPosts} />
       <FAQSection />
       <CTASection />
     </>

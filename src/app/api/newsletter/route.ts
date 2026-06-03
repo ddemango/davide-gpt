@@ -11,27 +11,27 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { email, firstName } = schema.parse(body);
 
-    // =====================================================
-    // Connect your email provider:
-    // =====================================================
-
-    // ConvertKit
-    // const FORM_ID = process.env.CONVERTKIT_FORM_ID
-    // const API_KEY = process.env.CONVERTKIT_API_KEY
-    // await fetch(`https://api.convertkit.com/v3/forms/${FORM_ID}/subscribe`, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ api_key: API_KEY, email, first_name: firstName }),
-    // })
-
-    // Mailchimp
-    // await addMailchimpSubscriber({ email, firstName })
-
-    // Beehiiv
-    // await addBeehiivSubscriber({ email })
-
-    // HubSpot Newsletter list
-    // await addHubSpotContact({ email, firstName, subscribeToNewsletter: true })
+    // Beehiiv integration — only fires when env vars are configured
+    if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
+      await fetch(
+        `https://api.beehiiv.com/v2/publications/${process.env.BEEHIIV_PUBLICATION_ID}/subscriptions`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.BEEHIIV_API_KEY}`,
+          },
+          body: JSON.stringify({
+            email,
+            reactivate_existing: false,
+            send_welcome_email: true,
+            utm_source: 'website',
+            utm_medium: 'organic',
+            referring_site: 'davidegpt.ai',
+          }),
+        }
+      );
+    }
 
     console.log('[Newsletter Signup]', { email, firstName });
     return NextResponse.json({ success: true });

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Clock, ArrowRight, Tag } from 'lucide-react';
-import { blogPosts } from '@/lib/data';
+import { getBlogPosts } from '@/lib/notion';
 import { formatDate } from '@/lib/utils';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeader from '@/components/ui/SectionHeader';
@@ -10,6 +10,8 @@ import Badge from '@/components/ui/Badge';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
 import NewsletterCTA from '@/components/sections/NewsletterCTA';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'AI Blog — Tips, Tutorials & Tool Reviews',
   description:
@@ -17,10 +19,11 @@ export const metadata: Metadata = {
   alternates: { canonical: '/blog' },
 };
 
-const featured = blogPosts.find((p) => p.featured);
-const rest = blogPosts.filter((p) => !p.featured);
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts();
+  const featured = blogPosts.find((p) => p.featured);
+  const rest = blogPosts.filter((p) => !p.featured);
 
-export default function BlogPage() {
   return (
     <>
       <SchemaMarkup

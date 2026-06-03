@@ -3,13 +3,17 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Download, Lock, ArrowRight, BookOpen, FileText, Video, Wrench, Layout } from 'lucide-react';
-import { resources } from '@/lib/data';
+import { resources as staticResources } from '@/lib/data';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeader from '@/components/ui/SectionHeader';
 import type { Resource } from '@/types';
+
+interface FeaturedResourcesProps {
+  resources?: Resource[];
+}
 
 const typeIcons: Record<Resource['type'], React.ElementType> = {
   Guide: BookOpen,
@@ -89,8 +93,9 @@ function ResourceCard({ resource, index }: { resource: Resource; index: number }
   );
 }
 
-export default function FeaturedResources() {
-  const featured = resources.filter((r) => r.featured).slice(0, 6);
+export default function FeaturedResources({ resources }: FeaturedResourcesProps) {
+  const allResources = resources ?? staticResources;
+  const featured = allResources.filter((r) => r.featured).slice(0, 6);
 
   return (
     <SectionWrapper id="resources">

@@ -3,16 +3,22 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Clock, ArrowRight, Tag } from 'lucide-react';
-import { blogPosts } from '@/lib/data';
+import { blogPosts as staticBlogPosts } from '@/lib/data';
 import { formatDate } from '@/lib/utils';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeader from '@/components/ui/SectionHeader';
+import type { BlogPost } from '@/types';
 
-export default function BlogPreview() {
-  const recent = blogPosts.slice(0, 3);
+interface BlogPreviewProps {
+  posts?: BlogPost[];
+}
+
+export default function BlogPreview({ posts }: BlogPreviewProps) {
+  const allPosts = posts ?? staticBlogPosts;
+  const recent = allPosts.slice(0, 3);
 
   return (
     <SectionWrapper id="blog">
