@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -20,6 +21,9 @@ interface BlogPreviewProps {
 export default function BlogPreview({ posts }: BlogPreviewProps) {
   const allPosts = posts ?? staticBlogPosts;
   const recent = allPosts.slice(0, 3);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const handleImageError = (slug: string) =>
+    setFailedImages((prev) => new Set(Array.from(prev).concat(slug)));
 
   return (
     <SectionWrapper id="blog">
@@ -47,13 +51,14 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
               <Card hover glow className="h-full flex flex-col">
                 {/* Thumbnail */}
                 <div className="h-44 rounded-xl bg-gradient-to-br from-surface-2 to-surface-3 border border-white/[0.04] mb-4 flex items-center justify-center relative overflow-hidden">
-                  {post.thumbnail ? (
+                  {post.thumbnail && !failedImages.has(post.slug) ? (
                     <Image
                       src={post.thumbnail}
                       alt={post.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      onError={() => handleImageError(post.slug)}
                     />
                   ) : (
                     <>

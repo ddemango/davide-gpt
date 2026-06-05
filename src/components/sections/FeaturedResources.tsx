@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -26,6 +27,7 @@ const typeIcons: Record<Resource['type'], React.ElementType> = {
 
 function ResourceCard({ resource, index }: { resource: Resource; index: number }) {
   const Icon = typeIcons[resource.type];
+  const [imgFailed, setImgFailed] = useState(false);
 
   return (
     <motion.div
@@ -38,13 +40,14 @@ function ResourceCard({ resource, index }: { resource: Resource; index: number }
         <Card hover glow className="h-full flex flex-col">
           {/* Thumbnail */}
           <div className="relative h-44 rounded-xl overflow-hidden bg-gradient-to-br from-surface-3 to-surface-2 mb-4 flex items-center justify-center">
-            {resource.thumbnail ? (
+            {resource.thumbnail && !imgFailed ? (
               <Image
                 src={resource.thumbnail}
                 alt={resource.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                onError={() => setImgFailed(true)}
               />
             ) : (
               <>

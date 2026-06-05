@@ -26,6 +26,10 @@ interface Props {
 export default function ResourcesGrid({ resources }: Props) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [query, setQuery] = useState('');
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  const handleImageError = (slug: string) =>
+    setFailedImages((prev) => new Set(Array.from(prev).concat(slug)));
 
   const filtered = useMemo(() => {
     let result = resources;
@@ -108,13 +112,14 @@ export default function ResourcesGrid({ resources }: Props) {
                 >
                   <Card hover glow className="h-full flex flex-col">
                     <div className="relative h-44 rounded-xl overflow-hidden bg-gradient-to-br from-surface-3 to-surface-2 mb-4 flex items-center justify-center">
-                      {resource.thumbnail ? (
+                      {resource.thumbnail && !failedImages.has(resource.slug) ? (
                         <Image
                           src={resource.thumbnail}
                           alt={resource.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          onError={() => handleImageError(resource.slug)}
                         />
                       ) : (
                         <>
