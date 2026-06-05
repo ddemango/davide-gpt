@@ -22,4 +22,5 @@ jobs:
           NOTION_RESOURCES_DB: ${{ secrets.NOTION_RESOURCES_DB }}
           NOTION_BLOG_DB: ${{ secrets.NOTION_BLOG_DB }}
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
         run: node scripts/generate-daily-content.mjs

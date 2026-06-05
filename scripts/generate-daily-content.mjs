@@ -55,8 +55,6 @@ if (!ANTHROPIC_API_KEY || !NOTION_TOKEN || !NOTION_RESOURCES_DB || !NOTION_BLOG_
 
 const today = new Date();
 const dateStr = today.toISOString().split('T')[0];
-const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-const isResource = dayOfYear % 2 === 0;
 
 const notionHeaders = {
   Authorization: `Bearer ${NOTION_TOKEN}`,
@@ -225,13 +223,10 @@ async function triggerRedeploy() {
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 (async () => {
-  console.log(`\n📅 ${dateStr} — generating ${isResource ? 'resource' : 'blog post'}...\n`);
+  console.log(`\n📅 ${dateStr} — generating daily resource + blog post...\n`);
   try {
-    if (isResource) {
-      await generateResource();
-    } else {
-      await generateBlogPost();
-    }
+    await generateResource();
+    await generateBlogPost();
     await triggerRedeploy();
     console.log('\n✅ Done!\n');
   } catch (err) {
