@@ -13,6 +13,7 @@ export interface Resource {
   tags: string[];
   featured?: boolean;
   publishedAt: string;
+  notionId?: string;
 }
 
 export interface BlogPost {

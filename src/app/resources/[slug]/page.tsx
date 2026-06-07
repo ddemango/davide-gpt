@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import {
   Download, Lock, ChevronLeft, BookOpen, Tag, Clock,
-  Users, Star, CheckCircle2, ArrowRight
+  Users, Star, CheckCircle2, ArrowRight,
 } from 'lucide-react';
 import { resources } from '@/lib/data';
-import { getResourceBySlug, getResources } from '@/lib/notion';
-import Button from '@/components/ui/Button';
+import { getResourceBySlug, getResources, getResourceContent } from '@/lib/notion';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
 import NewsletterCTA from '@/components/sections/NewsletterCTA';
+import DownloadButton from '@/components/ui/DownloadButton';
 
 export const revalidate = 3600;
 
@@ -54,9 +55,15 @@ export default async function ResourcePage({ params }: Props) {
   ]);
   if (!resource) notFound();
 
+  const content = resource.notionId
+    ? await getResourceContent(resource.notionId)
+    : '';
+
   const related = allResources
     .filter((r) => r.slug !== resource.slug && r.category === resource.category)
     .slice(0, 3);
+
+  const downloadFilename = `${resource.slug}.txt`;
 
   return (
     <>
@@ -84,7 +91,7 @@ export default async function ResourcePage({ params }: Props) {
           </nav>
 
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-            {/* Left — Content */}
+            {/* Left — Info */}
             <div className="lg:col-span-2">
               <div className="flex flex-wrap gap-2 mb-4">
                 <Badge variant="brand" size="md">{resource.category}</Badge>
@@ -126,20 +133,22 @@ export default async function ResourcePage({ params }: Props) {
                 )}
               </div>
 
-              {/* What you'll get */}
-              <div className="mb-8">
-                <h2 className="font-display text-xl font-bold text-white mb-4">
-                  What&apos;s Included
-                </h2>
-                <ul className="space-y-3" role="list">
-                  {whatYouGetItems.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-slate-300">
-                      <CheckCircle2 className="h-5 w-5 text-brand-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Static checklist for resources without real content */}
+              {!content && (
+                <div className="mb-8">
+                  <h2 className="font-display text-xl font-bold text-white mb-4">
+                    What&apos;s Included
+                  </h2>
+                  <ul className="space-y-3" role="list">
+                    {whatYouGetItems.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-slate-300">
+                        <CheckCircle2 className="h-5 w-5 text-brand-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Tags */}
               <div className="flex flex-wrap gap-2">
@@ -155,7 +164,6 @@ export default async function ResourcePage({ params }: Props) {
             {/* Right — CTA Card */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <Card className="border-gradient" padding="lg">
-                {/* Thumbnail */}
                 <div className="h-48 rounded-xl bg-gradient-to-br from-brand-600/20 to-accent-600/20 flex items-center justify-center mb-6 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10" />
                   <BookOpen className="h-16 w-16 text-brand-400 relative z-10" aria-hidden="true" />
@@ -170,24 +178,22 @@ export default async function ResourcePage({ params }: Props) {
                   )}
                 </div>
 
-                {resource.isFree ? (
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    icon={<Download className="h-5 w-5" />}
-                  >
+                {resource.isFree && content ? (
+                  <DownloadButton
+                    content={content}
+                    filename={downloadFilename}
+                    label="Download Free"
+                  />
+                ) : resource.isFree ? (
+                  <div className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 text-sm transition-colors cursor-pointer">
+                    <Download className="h-5 w-5" aria-hidden="true" />
                     Download Free
-                  </Button>
+                  </div>
                 ) : (
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    fullWidth
-                    icon={<Lock className="h-5 w-5" />}
-                  >
+                  <div className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 text-sm transition-colors cursor-pointer">
+                    <Lock className="h-5 w-5" aria-hidden="true" />
                     Get Access — ${resource.price}
-                  </Button>
+                  </div>
                 )}
 
                 <p className="text-center text-xs text-slate-500 mt-3">
@@ -209,6 +215,28 @@ export default async function ResourcePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Full Resource Content */}
+      {content && (
+        <SectionWrapper>
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
+              <h2 className="font-display text-2xl font-bold text-white">Resource Content</h2>
+              {resource.isFree && (
+                <DownloadButton
+                  content={content}
+                  filename={downloadFilename}
+                  label="Download"
+                  fullWidth={false}
+                />
+              )}
+            </div>
+            <div className="prose-custom">
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </div>
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* Related Resources */}
       {related.length > 0 && (

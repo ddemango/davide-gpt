@@ -87,6 +87,7 @@ function mapResourcePage(page: NotionPage): Resource | null {
       pickThumbnail(RESOURCE_THUMBNAILS, category, slug);
 
     return {
+      notionId: page.id,
       slug,
       title,
       description: richText(props['Description']?.rich_text),
@@ -269,6 +270,21 @@ export async function getBlogPostContent(pageId: string): Promise<string> {
     return n2m.toMarkdownString(mdBlocks).parent ?? '';
   } catch (err) {
     console.error('[Notion] getBlogPostContent failed:', err);
+    return '';
+  }
+}
+
+export async function getResourceContent(pageId: string): Promise<string> {
+  if (!process.env.NOTION_TOKEN) return '';
+
+  try {
+    const notion = getNotionClient();
+    const NotionToMarkdown = getNotionToMd();
+    const n2m = new NotionToMarkdown({ notionClient: notion });
+    const mdBlocks = await n2m.pageToMarkdown(pageId);
+    return n2m.toMarkdownString(mdBlocks).parent ?? '';
+  } catch (err) {
+    console.error('[Notion] getResourceContent failed:', err);
     return '';
   }
 }
