@@ -5,6 +5,7 @@ import { ChevronLeft, Clock, Tag, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { blogPosts } from '@/lib/data';
 import { getBlogPostBySlug, getBlogPosts, getBlogPostContent } from '@/lib/notion';
+import { staticBlogContent } from '@/lib/static-blog-content';
 import { formatDate } from '@/lib/utils';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
@@ -46,10 +47,11 @@ export default async function BlogPostPage({ params }: Props) {
   ]);
   if (!post) notFound();
 
-  // Fetch Notion markdown content if available
+  // Notion content for AI-generated posts; static content for seeded posts
   const notionContent = post.notionId
     ? await getBlogPostContent(post.notionId)
     : '';
+  const articleContent = notionContent || staticBlogContent[post.slug] || '';
 
   const related = allPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
@@ -126,43 +128,14 @@ export default async function BlogPostPage({ params }: Props) {
               <p className="absolute bottom-4 left-4 text-xs text-slate-600">[ Article hero image ]</p>
             </div>
 
-            {/* Article body — Notion content or static placeholder */}
-            {notionContent ? (
+            {/* Article body */}
+            {articleContent ? (
               <div className="prose-custom">
-                <ReactMarkdown>{notionContent}</ReactMarkdown>
+                <ReactMarkdown>{articleContent}</ReactMarkdown>
               </div>
             ) : (
               <div className="space-y-6 text-slate-300 leading-relaxed">
-                <p className="text-lg font-medium text-slate-200">
-                  {post.excerpt}
-                </p>
-                <p>
-                  AI tools are transforming the way we work, create, and communicate. In this article, we&apos;ll break down
-                  everything you need to know about this topic — with practical, actionable steps you can start using today.
-                </p>
-                <h2 className="font-display text-2xl font-bold text-white pt-4">Why This Matters in 2024</h2>
-                <p>
-                  The AI landscape changes rapidly. What worked six months ago may already be outdated. That&apos;s why staying
-                  current isn&apos;t just a competitive advantage — it&apos;s a necessity for anyone serious about leveraging these tools.
-                </p>
-                <h2 className="font-display text-2xl font-bold text-white pt-4">Getting Started</h2>
-                <p>
-                  You don&apos;t need any technical background to get value from this. Whether you&apos;re a complete beginner or someone
-                  who&apos;s been experimenting with AI tools for a while, there&apos;s something here for you.
-                </p>
-                <p>
-                  The key is to focus on practical applications rather than theory. Every concept here has a direct,
-                  real-world use case that you can implement immediately.
-                </p>
-                <h2 className="font-display text-2xl font-bold text-white pt-4">The Bottom Line</h2>
-                <p>
-                  AI tools like ChatGPT, Claude, and Gemini are not going away. In fact, they&apos;re getting more powerful
-                  by the month. The question isn&apos;t whether to use them — it&apos;s how to use them effectively.
-                </p>
-                <p className="text-slate-400 italic border-l-4 border-brand-500 pl-4">
-                  &ldquo;The people who will thrive in the AI era are not those who resist it — they&apos;re those who learn to
-                  work alongside it.&rdquo; — Davide
-                </p>
+                <p className="text-lg font-medium text-slate-200">{post.excerpt}</p>
               </div>
             )}
 
