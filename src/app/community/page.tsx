@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import {
   Users, MessageCircle, Zap, BookOpen, Calendar,
   CheckCircle2, ArrowRight, Star
@@ -87,17 +86,16 @@ export default function CommunityPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
+              href="/newsletter"
               variant="primary"
               size="xl"
               icon={<ArrowRight className="h-5 w-5" />}
             >
               Join the Community — Free
             </Button>
-            <Link href="/newsletter">
-              <Button variant="secondary" size="xl">
-                Get the Newsletter Instead
-              </Button>
-            </Link>
+            <Button href="/newsletter" variant="secondary" size="xl">
+              Get the Newsletter Instead
+            </Button>
           </div>
           <p className="mt-4 text-sm text-slate-600">
             Always free. No credit card. Join in under 60 seconds.
@@ -164,6 +162,7 @@ export default function CommunityPage() {
               ))}
             </ul>
             <Button
+              href="/newsletter"
               variant="primary"
               size="lg"
               icon={<Users className="h-5 w-5" />}

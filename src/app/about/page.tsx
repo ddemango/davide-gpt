@@ -100,11 +100,16 @@ export default function AboutPage() {
             <div className="relative">
               <div className="h-[460px] rounded-2xl bg-gradient-to-br from-surface-2 to-surface-3 border border-white/[0.06] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10" />
-                <div className="relative z-10 text-center">
-                  <div className="h-32 w-32 rounded-full bg-gradient-brand mx-auto mb-4 flex items-center justify-center shadow-xl shadow-brand-600/30">
-                    <span className="font-display text-5xl font-bold text-white">D</span>
+                <div className="relative z-10 text-center px-8">
+                  <div className="h-40 w-40 rounded-full bg-gradient-brand mx-auto mb-6 flex items-center justify-center shadow-2xl shadow-brand-600/40 ring-4 ring-brand-500/20">
+                    <span className="font-display text-6xl font-bold text-white">D</span>
                   </div>
-                  <p className="text-slate-400 text-sm">[ Photo of Davide ]</p>
+                  <p className="font-display text-2xl font-bold text-white mb-1">Davide</p>
+                  <p className="text-brand-400 text-sm font-medium mb-4">AI Educator & Creator</p>
+                  <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                    500K+ Followers Worldwide
+                  </div>
                 </div>
               </div>
 

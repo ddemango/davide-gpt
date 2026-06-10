@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Mail, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { newsletterSchema, type NewsletterFormData } from '@/lib/validations';
 import Button from '@/components/ui/Button';
 import { Analytics } from '@/lib/analytics';
 
 export default function NewsletterCTA() {
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -19,17 +21,23 @@ export default function NewsletterCTA() {
   });
 
   const onSubmit = async (data: NewsletterFormData) => {
-    Analytics.formStart('newsletter_hero');
+    setServerError('');
+    Analytics.formStart('newsletter_cta');
     try {
-      // Connect to your email provider:
-      // Option 1 — API route: await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify(data) })
-      // Option 2 — ConvertKit: POST to https://api.convertkit.com/v3/forms/{FORM_ID}/subscribe
-      // Option 3 — Zapier: POST to process.env.ZAPIER_WEBHOOK_URL
-      await new Promise((r) => setTimeout(r, 800)); // Remove this line in production
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        setServerError(json.error ?? 'Something went wrong. Please try again.');
+        return;
+      }
       Analytics.newsletterSignup('homepage_cta');
       setSubmitted(true);
     } catch {
-      // Handle error — show a toast or error message
+      setServerError('Network error. Please check your connection and try again.');
     }
   };
 
@@ -78,47 +86,55 @@ export default function NewsletterCTA() {
 
           {submitted ? (
             <div className="flex items-center justify-center gap-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 px-6 py-4 text-emerald-400">
-              <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-              <p className="font-medium">You're in! Check your inbox for a welcome email.</p>
+              <CheckCircle2 className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+              <p className="font-medium">You&apos;re in! Check your inbox for a welcome email.</p>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-              noValidate
-              aria-label="Newsletter signup form"
-            >
-              <div className="flex-1">
-                <label htmlFor="newsletter-email" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="newsletter-email"
-                  type="email"
-                  placeholder="Enter your email address"
-                  autoComplete="email"
-                  aria-describedby={errors.email ? 'newsletter-email-error' : undefined}
-                  aria-invalid={!!errors.email}
-                  className="w-full rounded-xl bg-surface-2 border border-white/10 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
-                  {...register('email')}
-                />
-                {errors.email && (
-                  <p id="newsletter-email-error" role="alert" className="mt-1.5 text-xs text-red-400 text-left">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                loading={isSubmitting}
-                icon={<ArrowRight className="h-5 w-5" />}
-                className="flex-shrink-0"
+            <>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                noValidate
+                aria-label="Newsletter signup form"
               >
-                Subscribe Free
-              </Button>
-            </form>
+                <div className="flex-1">
+                  <label htmlFor="newsletter-email" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="newsletter-email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    autoComplete="email"
+                    aria-describedby={errors.email ? 'newsletter-email-error' : undefined}
+                    aria-invalid={!!errors.email}
+                    className="w-full rounded-xl bg-surface-2 border border-white/10 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
+                    {...register('email')}
+                  />
+                  {errors.email && (
+                    <p id="newsletter-email-error" role="alert" className="mt-1.5 text-xs text-red-400 text-left">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  loading={isSubmitting}
+                  icon={<ArrowRight className="h-5 w-5" />}
+                  className="flex-shrink-0"
+                >
+                  Subscribe Free
+                </Button>
+              </form>
+              {serverError && (
+                <p role="alert" className="mt-3 flex items-center justify-center gap-1.5 text-sm text-red-400">
+                  <AlertCircle className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                  {serverError}
+                </p>
+              )}
+            </>
           )}
 
           <p className="mt-4 text-xs text-slate-600">

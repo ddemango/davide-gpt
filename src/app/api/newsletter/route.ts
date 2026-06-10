@@ -6,38 +6,63 @@ const schema = z.object({
   firstName: z.string().optional(),
 });
 
+let cachedListId: string | null = null;
+
+async function getListId(apiKey: string): Promise<string | null> {
+  if (cachedListId) return cachedListId;
+  const res = await fetch(
+    `https://emailoctopus.com/api/1.6/lists?api_key=${encodeURIComponent(apiKey)}&limit=1`,
+  );
+  if (!res.ok) return null;
+  const json = await res.json();
+  const id: string | undefined = json?.data?.[0]?.id;
+  if (id) cachedListId = id;
+  return id ?? null;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { email, firstName } = schema.parse(body);
 
-    // Beehiiv integration — only fires when env vars are configured
-    if (process.env.BEEHIIV_API_KEY && process.env.BEEHIIV_PUBLICATION_ID) {
-      await fetch(
-        `https://api.beehiiv.com/v2/publications/${process.env.BEEHIIV_PUBLICATION_ID}/subscriptions`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.BEEHIIV_API_KEY}`,
-          },
-          body: JSON.stringify({
-            email,
-            reactivate_existing: false,
-            send_welcome_email: true,
-            utm_source: 'website',
-            utm_medium: 'organic',
-            referring_site: 'davidegpt.ai',
-          }),
-        }
-      );
+    const apiKey = process.env.EMAILOCTOPUS_API_KEY;
+    if (!apiKey) {
+      console.warn('[Newsletter] EMAILOCTOPUS_API_KEY not set');
+      return NextResponse.json({ success: true });
     }
 
-    console.log('[Newsletter Signup]', { email, firstName });
+    // Allow hard-coded list ID override, otherwise auto-discover
+    const listId = process.env.EMAILOCTOPUS_LIST_ID ?? (await getListId(apiKey));
+    if (!listId) {
+      console.error('[Newsletter] Could not determine EmailOctopus list ID');
+      return NextResponse.json({ error: 'Newsletter configuration error' }, { status: 500 });
+    }
+
+    const res = await fetch(
+      `https://emailoctopus.com/api/1.6/lists/${listId}/contacts`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key: apiKey,
+          email_address: email,
+          fields: { FirstName: firstName ?? '' },
+          status: 'SUBSCRIBED',
+        }),
+      }
+    );
+
+    // 409 = already subscribed — treat as success
+    if (!res.ok && res.status !== 409) {
+      const json = await res.json().catch(() => ({}));
+      console.error('[Newsletter] EmailOctopus error', res.status, json);
+      return NextResponse.json({ error: 'Subscription failed. Please try again.' }, { status: 502 });
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
     console.error('[Newsletter API Error]', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

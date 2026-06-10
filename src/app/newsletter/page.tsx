@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Mail, CheckCircle2, ArrowRight, Zap, BookOpen, Star } from 'lucide-react';
+import { Mail, CheckCircle2, AlertCircle, ArrowRight, Zap, BookOpen, Star } from 'lucide-react';
 import { newsletterSchema, type NewsletterFormData } from '@/lib/validations';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
@@ -38,6 +38,8 @@ const recentIssues = [
 
 export default function NewsletterPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -47,17 +49,23 @@ export default function NewsletterPage() {
   });
 
   const onSubmit = async (data: NewsletterFormData) => {
+    setServerError('');
     Analytics.formStart('newsletter_page');
     try {
-      await fetch('/api/newsletter', {
+      const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        setServerError(json.error ?? 'Something went wrong. Please try again.');
+        return;
+      }
       Analytics.newsletterSignup('newsletter_page');
       setSubmitted(true);
     } catch {
-      // Handle error
+      setServerError('Network error. Please check your connection and try again.');
     }
   };
 
@@ -144,6 +152,12 @@ export default function NewsletterPage() {
                   >
                     Subscribe — It&apos;s Free
                   </Button>
+                  {serverError && (
+                    <p role="alert" className="flex items-center gap-1.5 text-sm text-red-400">
+                      <AlertCircle className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                      {serverError}
+                    </p>
+                  )}
                   <p className="text-xs text-slate-600 text-center">
                     No spam. Unsubscribe anytime. View our{' '}
                     <a href="/privacy" className="underline hover:text-slate-400">Privacy Policy</a>.

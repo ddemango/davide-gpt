@@ -121,13 +121,6 @@ export default async function BlogPostPage({ params }: Props) {
       <SectionWrapper>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-4 max-w-6xl mx-auto">
           <article className="lg:col-span-3 prose-custom">
-            {/* Hero thumbnail */}
-            <div className="h-64 md:h-80 rounded-2xl bg-gradient-to-br from-surface-2 to-surface-3 flex items-center justify-center mb-10 relative overflow-hidden border border-white/[0.06]">
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-600/15 to-accent-600/15" />
-              <Tag className="h-16 w-16 text-slate-600 relative z-10" aria-hidden="true" />
-              <p className="absolute bottom-4 left-4 text-xs text-slate-600">[ Article hero image ]</p>
-            </div>
-
             {/* Article body */}
             {articleContent ? (
               <div className="prose-custom">
