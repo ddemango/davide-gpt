@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
+import AboutPhoto from '@/components/ui/AboutPhoto';
 import {
   Youtube, Instagram, Twitter, Linkedin, ArrowRight,
   CheckCircle2, Calendar, Users, BookOpen, Star
@@ -99,25 +99,7 @@ export default function AboutPage() {
 
             {/* Photo + social proof */}
             <div className="relative">
-              <div className="h-[460px] rounded-2xl border border-white/[0.06] overflow-hidden relative">
-                <Image
-                  src="/images/davide.jpg"
-                  alt="Davide DeMango — AI Educator & Creator"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="font-display text-2xl font-bold text-white mb-0.5">Davide DeMango</p>
-                  <p className="text-brand-400 text-sm font-medium mb-3">AI Educator & Creator</p>
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-                    500K+ Followers Worldwide
-                  </div>
-                </div>
-              </div>
+              <AboutPhoto />
 
               {/* Floating stat */}
               <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-max">
