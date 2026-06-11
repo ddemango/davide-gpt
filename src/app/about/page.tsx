@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 };
 
 const milestones = [
-  { year: '2022', event: 'Started creating AI content — reached 10K followers in 60 days' },
-  { year: '2023', event: 'Grew to 200K+ followers. Launched first free AI resource pack' },
-  { year: '2024', event: 'Hit 500K+ followers. Launched DavideGPT.ai and taught 50K+ students' },
+  { year: '2013', event: 'Created Grampresso — an app that automated social media posting and growth in the background' },
+  { year: '2024', event: 'Launched Advanta AI, an agency helping businesses automate workflows and eliminate time-consuming manual tasks' },
+  { year: '2026', event: 'Created DavideGPT — teaching everyday people how to use AI to gain real knowledge, save time, and make it profitable' },
 ];
 
 const socialLinks = [
