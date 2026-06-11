@@ -148,7 +148,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '7 min read',
     tags: ['ChatGPT', 'Content', 'Social Media'],
     featured: true,
-    author: { name: 'Davide', avatar: '' },
+    author: { name: 'Davide DeMango', avatar: '' },
   },
   {
     slug: 'claude-vs-chatgpt-which-is-better',
@@ -161,7 +161,7 @@ export const blogPosts: BlogPost[] = [
     readTime: '10 min read',
     tags: ['Claude', 'ChatGPT', 'Comparison'],
     featured: true,
-    author: { name: 'Davide', avatar: '' },
+    author: { name: 'Davide DeMango', avatar: '' },
   },
   {
     slug: '10-ai-tools-that-save-10-hours-per-week',
@@ -173,7 +173,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2024-03-05',
     readTime: '5 min read',
     tags: ['Productivity', 'AI Tools', 'Automation'],
-    author: { name: 'Davide', avatar: '' },
+    author: { name: 'Davide DeMango', avatar: '' },
   },
   {
     slug: 'prompt-engineering-for-beginners',
@@ -185,7 +185,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2024-02-28',
     readTime: '12 min read',
     tags: ['Prompts', 'Beginner', 'Technique'],
-    author: { name: 'Davide', avatar: '' },
+    author: { name: 'Davide DeMango', avatar: '' },
   },
   {
     slug: 'how-to-make-money-with-ai',
@@ -197,7 +197,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2024-02-19',
     readTime: '9 min read',
     tags: ['Business', 'Income', 'AI Skills'],
-    author: { name: 'Davide', avatar: '' },
+    author: { name: 'Davide DeMango', avatar: '' },
   },
   {
     slug: 'gemini-vs-chatgpt-google-ai',
@@ -209,7 +209,7 @@ export const blogPosts: BlogPost[] = [
     publishedAt: '2024-02-10',
     readTime: '8 min read',
     tags: ['Gemini', 'Google', 'ChatGPT'],
-    author: { name: 'Davide', avatar: '' },
+    author: { name: 'Davide DeMango', avatar: '' },
   },
 ];
 

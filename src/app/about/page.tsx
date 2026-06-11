@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   Youtube, Instagram, Twitter, Linkedin, ArrowRight,
@@ -71,14 +72,14 @@ export default function AboutPage() {
         <div className="container-wide relative z-10">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
             <div>
-              <Badge variant="brand" size="md" className="mb-5">About Davide</Badge>
+              <Badge variant="brand" size="md" className="mb-5">About Davide DeMango</Badge>
               <h1 className="font-display text-4xl font-bold text-white sm:text-5xl leading-tight mb-5">
                 Teaching AI to{' '}
                 <span className="text-gradient">the World</span>,{' '}
                 One Guide at a Time
               </h1>
               <p className="text-lg text-slate-400 leading-relaxed mb-8">
-                I'm Davide — an AI educator, content creator, and the founder of DavideGPT. I help
+                I'm Davide DeMango — an AI educator, content creator, and the founder of DavideGPT. I help
                 everyday people understand and actually use AI tools to save time, create better
                 work, and stay ahead in their careers and businesses.
               </p>
@@ -98,16 +99,21 @@ export default function AboutPage() {
 
             {/* Photo + social proof */}
             <div className="relative">
-              <div className="h-[460px] rounded-2xl bg-gradient-to-br from-surface-2 to-surface-3 border border-white/[0.06] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-600/10 to-accent-600/10" />
-                <div className="relative z-10 text-center px-8">
-                  <div className="h-40 w-40 rounded-full bg-gradient-brand mx-auto mb-6 flex items-center justify-center shadow-2xl shadow-brand-600/40 ring-4 ring-brand-500/20">
-                    <span className="font-display text-6xl font-bold text-white">D</span>
-                  </div>
-                  <p className="font-display text-2xl font-bold text-white mb-1">Davide</p>
-                  <p className="text-brand-400 text-sm font-medium mb-4">AI Educator & Creator</p>
-                  <div className="flex items-center justify-center gap-2 text-sm text-slate-400">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="h-[460px] rounded-2xl border border-white/[0.06] overflow-hidden relative">
+                <Image
+                  src="/images/davide.jpg"
+                  alt="Davide DeMango — AI Educator & Creator"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="font-display text-2xl font-bold text-white mb-0.5">Davide DeMango</p>
+                  <p className="text-brand-400 text-sm font-medium mb-3">AI Educator & Creator</p>
+                  <div className="flex items-center gap-2 text-sm text-slate-300">
+                    <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
                     500K+ Followers Worldwide
                   </div>
                 </div>

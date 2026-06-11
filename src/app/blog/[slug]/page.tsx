@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="flex items-center gap-3 mb-3">
                 <div className="h-12 w-12 rounded-full bg-gradient-brand flex items-center justify-center text-lg font-bold text-white flex-shrink-0">D</div>
                 <div>
-                  <p className="font-semibold text-white text-sm">Davide</p>
+                  <p className="font-semibold text-white text-sm">Davide DeMango</p>
                   <p className="text-xs text-slate-500">AI Educator · 500K+ Followers</p>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default async function BlogPostPage({ params }: Props) {
               </p>
               <Link href="/about" className="mt-4 block">
                 <span className="text-xs font-medium text-brand-400 hover:text-brand-300 transition-colors">
-                  Read more about Davide →
+                  Read more about Davide DeMango →
                 </span>
               </Link>
             </Card>
