@@ -14,7 +14,7 @@ export default function AboutPhoto() {
             src="/davide.jpeg"
             alt="Davide DeMango — AI Educator & Creator"
             fill
-            className="object-cover object-top"
+            className="object-cover object-center"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
             onError={() => setImgError(true)}
