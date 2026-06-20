@@ -1,19 +1,18 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
 import {
-  Download, Lock, ChevronLeft, BookOpen, Tag, Clock,
-  Users, Star, CheckCircle2, ArrowRight,
+  Lock, ChevronLeft, BookOpen, Tag, Clock,
+  Users, Star, CheckCircle2, ArrowRight, Download,
 } from 'lucide-react';
 import { resources } from '@/lib/data';
-import { getResourceBySlug, getResources, getResourceContent } from '@/lib/notion';
+import { getResourceBySlug, getResources } from '@/lib/notion';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
 import NewsletterCTA from '@/components/sections/NewsletterCTA';
-import DownloadButton from '@/components/ui/DownloadButton';
+import EmailGateDownload from '@/components/ui/EmailGateDownload';
 
 export const revalidate = 3600;
 
@@ -45,7 +44,7 @@ const whatYouGetItems = [
   'Copy-paste ready templates and prompts',
   'Works with free and paid AI tools',
   'Regular updates as AI tools evolve',
-  'Access to the DavideGPT community for questions',
+  'Exclusive tips not published anywhere else',
 ];
 
 export default async function ResourcePage({ params }: Props) {
@@ -55,15 +54,11 @@ export default async function ResourcePage({ params }: Props) {
   ]);
   if (!resource) notFound();
 
-  const content = resource.notionId
-    ? await getResourceContent(resource.notionId)
-    : '';
+  const hasContent = !!resource.notionId;
 
   const related = allResources
     .filter((r) => r.slug !== resource.slug && r.category === resource.category)
     .slice(0, 3);
-
-  const downloadFilename = `${resource.slug}.txt`;
 
   return (
     <>
@@ -133,25 +128,47 @@ export default async function ResourcePage({ params }: Props) {
                 )}
               </div>
 
-              {/* Static checklist for resources without real content */}
-              {!content && (
-                <div className="mb-8">
-                  <h2 className="font-display text-xl font-bold text-white mb-4">
-                    What&apos;s Included
-                  </h2>
-                  <ul className="space-y-3" role="list">
-                    {whatYouGetItems.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-slate-300">
-                        <CheckCircle2 className="h-5 w-5 text-brand-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                        {item}
-                      </li>
+              {/* What's Included — always shown as a teaser */}
+              <div className="mb-8">
+                <h2 className="font-display text-xl font-bold text-white mb-4">
+                  What&apos;s Inside
+                </h2>
+                <ul className="space-y-3" role="list">
+                  {whatYouGetItems.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-slate-300">
+                      <CheckCircle2 className="h-5 w-5 text-brand-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Locked content preview */}
+              {hasContent && (
+                <div className="relative rounded-2xl border border-white/[0.06] overflow-hidden">
+                  {/* Blurred placeholder */}
+                  <div className="space-y-3 p-6 select-none pointer-events-none" aria-hidden="true">
+                    {['Introduction to the framework', 'Section 1: Core concepts explained', 'Section 2: Step-by-step walkthrough', '15+ prompt templates included', 'Real-world examples and results'].map((line, i) => (
+                      <div
+                        key={i}
+                        className="h-4 rounded bg-white/[0.06]"
+                        style={{ width: `${[90, 75, 85, 65, 80][i]}%` }}
+                      />
                     ))}
-                  </ul>
+                  </div>
+                  {/* Lock overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent flex flex-col items-center justify-end pb-8">
+                    <div className="h-10 w-10 rounded-full bg-brand-500/20 border border-brand-500/30 flex items-center justify-center mb-3">
+                      <Lock className="h-5 w-5 text-brand-400" aria-hidden="true" />
+                    </div>
+                    <p className="text-sm font-medium text-white mb-1">Full content unlocked on download</p>
+                    <p className="text-xs text-slate-500">Enter your email below to get instant access</p>
+                  </div>
                 </div>
               )}
 
               {/* Tags */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mt-8">
                 {resource.tags.map((tag) => (
                   <span key={tag} className="flex items-center gap-1 text-xs text-slate-500 bg-white/[0.04] rounded-full px-3 py-1">
                     <Tag className="h-3 w-3" aria-hidden="true" />
@@ -173,22 +190,28 @@ export default async function ResourcePage({ params }: Props) {
                   <div className="text-3xl font-display font-bold text-white mb-1">
                     {resource.isFree ? 'Free' : `$${resource.price}`}
                   </div>
-                  {resource.isFree && (
-                    <p className="text-sm text-slate-400">No email required</p>
-                  )}
+                  <p className="text-sm text-slate-400">
+                    {resource.isFree ? 'Enter your email to download' : 'One-time payment. Lifetime access.'}
+                  </p>
                 </div>
 
-                {resource.isFree && content ? (
-                  <DownloadButton
-                    content={content}
-                    filename={downloadFilename}
-                    label="Download Free"
-                  />
-                ) : resource.isFree ? (
-                  <div className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 text-sm transition-colors cursor-pointer">
-                    <Download className="h-5 w-5" aria-hidden="true" />
-                    Download Free
-                  </div>
+                {resource.isFree ? (
+                  hasContent ? (
+                    <EmailGateDownload
+                      slug={resource.slug}
+                      resourceTitle={resource.title}
+                      label="Download Free"
+                    />
+                  ) : (
+                    // No content yet — show newsletter subscribe instead
+                    <a
+                      href="/newsletter"
+                      className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 text-sm transition-colors"
+                    >
+                      <Download className="h-5 w-5" aria-hidden="true" />
+                      Join Waitlist — Get Notified
+                    </a>
+                  )
                 ) : (
                   <div className="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-brand-500 hover:bg-brand-400 text-white font-semibold px-6 py-3.5 text-sm transition-colors cursor-pointer">
                     <Lock className="h-5 w-5" aria-hidden="true" />
@@ -198,12 +221,12 @@ export default async function ResourcePage({ params }: Props) {
 
                 <p className="text-center text-xs text-slate-500 mt-3">
                   {resource.isFree
-                    ? 'Instant download. No signup needed.'
-                    : 'One-time payment. Lifetime access.'}
+                    ? 'No spam. Unsubscribe anytime.'
+                    : 'Secure checkout. Instant access.'}
                 </p>
 
                 <div className="mt-6 pt-6 border-t border-white/[0.06] space-y-3 text-sm text-slate-400">
-                  {['Instant access', 'Commercial use included', 'Free lifetime updates'].map((item) => (
+                  {['Instant download', 'Commercial use included', 'Free lifetime updates'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-emerald-400 flex-shrink-0" aria-hidden="true" />
                       {item}
@@ -215,28 +238,6 @@ export default async function ResourcePage({ params }: Props) {
           </div>
         </div>
       </section>
-
-      {/* Full Resource Content */}
-      {content && (
-        <SectionWrapper>
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
-              <h2 className="font-display text-2xl font-bold text-white">Resource Content</h2>
-              {resource.isFree && (
-                <DownloadButton
-                  content={content}
-                  filename={downloadFilename}
-                  label="Download"
-                  fullWidth={false}
-                />
-              )}
-            </div>
-            <div className="prose-custom">
-              <ReactMarkdown>{content}</ReactMarkdown>
-            </div>
-          </div>
-        </SectionWrapper>
-      )}
 
       {/* Related Resources */}
       {related.length > 0 && (

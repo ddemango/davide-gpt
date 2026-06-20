@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next';
-import { resources, blogPosts } from '@/lib/data';
+import { getBlogPosts, getResources } from '@/lib/notion';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://davidegpt.ai';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [allPosts, allResources] = await Promise.all([getBlogPosts(), getResources()]);
+
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
     { url: `${BASE_URL}/resources`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
@@ -16,14 +18,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/terms`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.2 },
   ];
 
-  const resourcePages: MetadataRoute.Sitemap = resources.map((r) => ({
+  const resourcePages: MetadataRoute.Sitemap = allResources.map((r) => ({
     url: `${BASE_URL}/resources/${r.slug}`,
     lastModified: new Date(r.publishedAt),
     changeFrequency: 'monthly',
     priority: 0.8,
   }));
 
-  const blogPages: MetadataRoute.Sitemap = blogPosts.map((p) => ({
+  const blogPages: MetadataRoute.Sitemap = allPosts.map((p) => ({
     url: `${BASE_URL}/blog/${p.slug}`,
     lastModified: new Date(p.publishedAt),
     changeFrequency: 'monthly',

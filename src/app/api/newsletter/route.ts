@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const schema = z.object({
   email: z.string().email(),
   firstName: z.string().optional(),
 });
+
+const HOUR_MS = 60 * 60 * 1000;
 
 let cachedListId: string | null = null;
 
@@ -21,9 +24,20 @@ async function getListId(apiKey: string): Promise<string | null> {
 }
 
 export async function POST(request: NextRequest) {
+  // IP-level rate limit: 10 requests per hour
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  if (!checkRateLimit(`newsletter:ip:${ip}`, 10, HOUR_MS)) {
+    return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+  }
+
   try {
     const body = await request.json();
     const { email, firstName } = schema.parse(body);
+
+    // Per-email rate limit: 3 requests per hour
+    if (!checkRateLimit(`newsletter:email:${email.toLowerCase()}`, 3, HOUR_MS)) {
+      return NextResponse.json({ error: 'Too many requests for this email. Please try again later.' }, { status: 429 });
+    }
 
     const apiKey = process.env.EMAILOCTOPUS_API_KEY;
     if (!apiKey) {

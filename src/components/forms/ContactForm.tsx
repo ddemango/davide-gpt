@@ -30,6 +30,16 @@ export default function ContactForm() {
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    mode: 'onChange',
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      interest: '',
+      message: '',
+      consent: false,
+    },
   });
 
   const onSubmit = async (data: ContactFormData) => {
@@ -146,7 +156,12 @@ export default function ContactForm() {
           {...register('interest')}
         >
           {interestOptions.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-surface-2">
+            <option
+              key={opt.value}
+              value={opt.value}
+              disabled={opt.value === ''}
+              className="bg-surface-2"
+            >
               {opt.label}
             </option>
           ))}
@@ -185,14 +200,36 @@ export default function ContactForm() {
       {/* Consent */}
       <div>
         <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            className="mt-1 h-4 w-4 rounded border-white/20 bg-surface-2 text-brand-500 focus:ring-brand-500 focus:ring-offset-surface flex-shrink-0"
-            aria-describedby={errors.consent ? 'consent-error' : undefined}
-            aria-invalid={!!errors.consent}
-            {...register('consent')}
-          />
-          <span className="text-sm text-slate-400">
+          <div className="relative flex-shrink-0 mt-0.5">
+            <input
+              type="checkbox"
+              className="peer sr-only"
+              aria-describedby={errors.consent ? 'consent-error' : undefined}
+              aria-invalid={!!errors.consent}
+              {...register('consent')}
+            />
+            {/* Custom checkbox box */}
+            <div className={cn(
+              'h-5 w-5 rounded border-2 transition-all',
+              'peer-checked:bg-brand-500 peer-checked:border-brand-500',
+              'peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-surface',
+              errors.consent ? 'border-red-500 bg-red-500/10' : 'border-white/40 bg-surface-2'
+            )} />
+            {/* Checkmark */}
+            <svg
+              className="absolute inset-0 h-5 w-5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none p-[3px]"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="3,8 7,12 13,4" />
+            </svg>
+          </div>
+          <span className="text-sm text-slate-400 leading-relaxed">
             I agree to be contacted by Davide regarding my inquiry. View our{' '}
             <a href="/privacy" className="text-brand-400 underline hover:text-brand-300">
               Privacy Policy

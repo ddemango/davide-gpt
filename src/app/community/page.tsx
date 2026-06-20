@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import {
   Users, MessageCircle, Zap, BookOpen, Calendar,
-  CheckCircle2, ArrowRight, Star
+  CheckCircle2, ArrowRight, Star, Mail
 } from 'lucide-react';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeader from '@/components/ui/SectionHeader';
@@ -14,50 +14,50 @@ import CTASection from '@/components/sections/CTASection';
 export const metadata: Metadata = {
   title: 'Join the DavideGPT Community — Learn AI Together',
   description:
-    'Join 10,000+ AI learners in the DavideGPT community. Get support, share prompts, discuss AI tools, and learn faster alongside others on the same journey.',
+    'Join 30,000+ AI learners in the DavideGPT newsletter community. Get weekly AI tips, exclusive prompts, early resource access, and connect with people mastering AI.',
   alternates: { canonical: '/community' },
 };
 
 const features = [
   {
     icon: MessageCircle,
-    title: 'Daily AI Discussions',
-    description: 'Share wins, ask questions, and learn from real people using AI every day.',
+    title: 'Weekly AI Breakdowns',
+    description: 'Every week I break down the most important AI news and tool updates in plain English — no jargon.',
   },
   {
     icon: Zap,
-    title: 'Weekly AI Challenges',
-    description: 'Put your skills to the test with practical AI challenges and win recognition.',
+    title: 'Exclusive Prompt Packs',
+    description: 'Subscribers get prompt packs and templates not available anywhere else — delivered straight to your inbox.',
   },
   {
     icon: BookOpen,
-    title: 'Exclusive Resources',
-    description: 'Community members get early access to new guides and prompt packs before public release.',
+    title: 'Early Resource Access',
+    description: 'Get new guides and toolkits 48 hours before they\'re publicly released on the site.',
   },
   {
     icon: Calendar,
-    title: 'Live Q&A Sessions',
-    description: 'Monthly live sessions with Davide where you can ask anything about AI tools.',
+    title: 'Live Q&A Invites',
+    description: 'Newsletter subscribers get priority invites to monthly live sessions where you can ask anything AI.',
   },
   {
     icon: Users,
-    title: 'Accountability Groups',
-    description: 'Join small groups of 5-10 people working toward similar AI learning goals.',
+    title: 'Community Discord (Coming Soon)',
+    description: 'A private Discord for newsletter subscribers is in the works. Subscribers get first access when it launches.',
   },
   {
     icon: Star,
     title: 'Member Spotlights',
-    description: 'Get featured in our weekly newsletter and social media for your AI wins.',
+    description: 'Share your AI wins and get featured in the newsletter — real results from real people.',
   },
 ];
 
 const included = [
-  'Access to the private Discord community',
-  'Weekly exclusive resources before public release',
-  'Monthly live Q&A with Davide',
-  'Prompt sharing and feedback',
-  'AI tool recommendations from the community',
-  'Accountability partner matching',
+  'Weekly AI tips and tool breakdowns',
+  'Exclusive prompt packs for subscribers only',
+  'New guides 48 hours before public release',
+  'Priority invites to monthly live Q&A sessions',
+  'First access when the Discord community launches',
+  'Unsubscribe anytime — no strings attached',
 ];
 
 export default function CommunityPage() {
@@ -77,12 +77,12 @@ export default function CommunityPage() {
         <div className="container-wide relative z-10 text-center max-w-4xl mx-auto">
           <Badge variant="brand" size="md" className="mb-5">Community</Badge>
           <h1 className="font-display text-4xl font-bold text-white sm:text-5xl leading-tight mb-5">
-            Learn AI Faster,{' '}
+            30,000+ People Learning AI{' '}
             <span className="text-gradient">Together</span>
           </h1>
           <p className="text-xl text-slate-400 leading-relaxed mb-10 max-w-2xl mx-auto">
-            Join 10,000+ AI learners sharing prompts, wins, tools, and strategies. The community
-            where everyday people become AI-confident.
+            The DavideGPT newsletter is where the community lives. Weekly AI insights, exclusive
+            prompts, early resource drops, and live Q&A invites — all free, every week.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
@@ -91,17 +91,17 @@ export default function CommunityPage() {
               size="xl"
               icon={<ArrowRight className="h-5 w-5" />}
             >
-              Join the Community — Free
+              Join Free — Get the Newsletter
             </Button>
-            <Button href="/newsletter" variant="secondary" size="xl">
-              Get the Newsletter Instead
+            <Button href="/resources" variant="secondary" size="xl" icon={<BookOpen className="h-5 w-5" />} iconPosition="left">
+              Browse Free Resources
             </Button>
           </div>
           <p className="mt-4 text-sm text-slate-600">
-            Always free. No credit card. Join in under 60 seconds.
+            Always free. No credit card. Unsubscribe anytime.
           </p>
 
-          {/* Member avatars */}
+          {/* Member count */}
           <div className="mt-12 flex items-center justify-center gap-3">
             <div className="flex -space-x-2">
               {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -115,7 +115,7 @@ export default function CommunityPage() {
               ))}
             </div>
             <p className="text-sm text-slate-400">
-              <strong className="text-white">10,000+</strong> members already inside
+              <strong className="text-white">30,000+</strong> subscribers already inside
             </p>
           </div>
         </div>
@@ -124,9 +124,9 @@ export default function CommunityPage() {
       {/* Features */}
       <SectionWrapper>
         <SectionHeader
-          eyebrow="What's Inside"
-          title={<>Everything You Get as a <span className="text-gradient">Member</span></>}
-          description="The DavideGPT community is built for people who want to learn AI practically — not just talk about it."
+          eyebrow="What You Get"
+          title={<>Everything Inside the <span className="text-gradient">Newsletter</span></>}
+          description="The DavideGPT newsletter is the fastest way to stay ahead in AI without spending hours doing research yourself."
         />
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, i) => {
@@ -150,7 +150,7 @@ export default function CommunityPage() {
           <div>
             <SectionHeader
               eyebrow="Free to Join"
-              title={<>Start <span className="text-gradient">Today</span> — It's Free</>}
+              title={<>Start <span className="text-gradient">Today</span> — It&apos;s Free</>}
               centered={false}
             />
             <ul className="space-y-3 mb-8" role="list">
@@ -165,18 +165,18 @@ export default function CommunityPage() {
               href="/newsletter"
               variant="primary"
               size="lg"
-              icon={<Users className="h-5 w-5" />}
+              icon={<Mail className="h-5 w-5" />}
               iconPosition="left"
             >
-              Join the Free Community
+              Subscribe to the Newsletter
             </Button>
           </div>
           <Card className="border-gradient p-8">
             <div className="flex flex-col gap-3">
               {[
-                { name: 'Sarah M.', msg: 'The prompts shared here alone are worth it!' },
-                { name: 'James K.', msg: 'Got my first AI client thanks to tips from this community.' },
-                { name: 'Priya R.', msg: 'Best AI community I\'ve joined. Super active and helpful.' },
+                { name: 'Sarah M.', msg: 'The prompts shared in the newsletter alone are worth subscribing for!' },
+                { name: 'James K.', msg: 'Got my first AI client thanks to tips from Davide\'s weekly emails.' },
+                { name: 'Priya R.', msg: 'Best AI newsletter I\'ve subscribed to. Practical, not hype.' },
               ].map(({ name, msg }) => (
                 <div key={name} className="flex gap-3 p-3 rounded-xl bg-surface-1">
                   <div className="h-8 w-8 rounded-full bg-gradient-brand flex-shrink-0 flex items-center justify-center text-xs font-bold text-white">

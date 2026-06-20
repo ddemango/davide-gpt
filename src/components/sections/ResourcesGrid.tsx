@@ -9,7 +9,7 @@ import Card from '@/components/ui/Card';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import type { Resource } from '@/types';
 
-const categories = ['All', 'ChatGPT', 'Claude', 'Content', 'Productivity', 'Business', 'Tools'];
+const STATIC_CATEGORIES = ['All', 'ChatGPT', 'Claude', 'Content', 'Productivity', 'Business', 'Tools'];
 
 const typeIcons: Record<Resource['type'], React.ElementType> = {
   Guide: BookOpen,
@@ -27,6 +27,24 @@ export default function ResourcesGrid({ resources }: Props) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [query, setQuery] = useState('');
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  // Derive categories from actual data, keeping a consistent order
+  const categories = useMemo(() => {
+    const seen = new Set<string>();
+    const dynamic: string[] = [];
+    for (const r of resources) {
+      if (!seen.has(r.category)) {
+        seen.add(r.category);
+        dynamic.push(r.category);
+      }
+    }
+    // Preserve STATIC_CATEGORIES order where possible, append new ones
+    const ordered = STATIC_CATEGORIES.filter((c) => c === 'All' || seen.has(c));
+    for (const c of dynamic) {
+      if (!ordered.includes(c)) ordered.push(c);
+    }
+    return ordered;
+  }, [resources]);
 
   const handleImageError = (slug: string) =>
     setFailedImages((prev) => new Set(Array.from(prev).concat(slug)));
@@ -97,9 +115,23 @@ export default function ResourcesGrid({ resources }: Props) {
       {/* Grid */}
       <SectionWrapper>
         {filtered.length === 0 ? (
-          <p className="text-center text-slate-400 py-16">
-            No resources found. Try a different category or search term.
-          </p>
+          <div className="text-center py-20">
+            <div className="h-16 w-16 rounded-2xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center mx-auto mb-4">
+              <Search className="h-8 w-8 text-slate-600" aria-hidden="true" />
+            </div>
+            <p className="text-white font-semibold mb-2">No resources found</p>
+            <p className="text-slate-500 text-sm">
+              Try a different {activeCategory !== 'All' ? 'category or ' : ''}search term.
+            </p>
+            {activeCategory !== 'All' && (
+              <button
+                onClick={() => { setActiveCategory('All'); setQuery(''); }}
+                className="mt-4 text-sm text-brand-400 hover:text-brand-300 transition-colors"
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((resource) => {

@@ -98,15 +98,15 @@ export default function AboutPage() {
             </div>
 
             {/* Photo + social proof */}
-            <div className="relative">
+            <div className="relative pb-8 lg:pb-10">
               <AboutPhoto />
 
-              {/* Floating stat */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-max">
-                <Card className="flex items-center gap-4 px-6 py-3 shadow-xl" padding="none">
+              {/* Floating stat — inline on mobile, absolute on desktop */}
+              <div className="mt-4 lg:absolute lg:-bottom-4 lg:left-1/2 lg:-translate-x-1/2 lg:mt-0 lg:w-max">
+                <Card className="flex items-center justify-center gap-4 sm:gap-6 px-4 sm:px-6 py-3 shadow-xl" padding="none">
                   {stats.slice(0, 3).map((stat, i) => (
-                    <div key={stat.label} className={`text-center ${i > 0 ? 'pl-4 border-l border-white/[0.06]' : ''}`}>
-                      <p className="font-display text-2xl font-bold text-gradient">{stat.value}{stat.suffix}</p>
+                    <div key={stat.label} className={`text-center ${i > 0 ? 'pl-4 sm:pl-6 border-l border-white/[0.06]' : ''}`}>
+                      <p className="font-display text-xl sm:text-2xl font-bold text-gradient">{stat.value}{stat.suffix}</p>
                       <p className="text-xs text-slate-500">{stat.label}</p>
                     </div>
                   ))}

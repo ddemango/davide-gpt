@@ -30,10 +30,11 @@ const perks = [
 ];
 
 const recentIssues = [
-  'The 5 ChatGPT Prompts That Save Me 10+ Hours/Week',
-  'Claude vs ChatGPT: My Honest Comparison After 90 Days',
-  'How to Use AI to Double Your Content Output',
-  'The AI Tools I Actually Use (and the Ones I Avoid)',
+  { title: 'The 5 ChatGPT Prompts That Save Me 10+ Hours/Week', date: 'Jun 16, 2026' },
+  { title: 'Claude 4 Is Out — Here\'s What Actually Changed', date: 'Jun 9, 2026' },
+  { title: 'How I Use AI to Write a Month of Content in One Afternoon', date: 'Jun 2, 2026' },
+  { title: 'The AI Tools I Actually Use Every Day (Honest List)', date: 'May 26, 2026' },
+  { title: 'Stop Using ChatGPT Wrong — Do This Instead', date: 'May 19, 2026' },
 ];
 
 export default function NewsletterPage() {
@@ -178,13 +179,16 @@ export default function NewsletterPage() {
                     <div className="h-8 w-8 rounded-lg bg-brand-500/10 flex items-center justify-center flex-shrink-0">
                       <Mail className="h-4 w-4 text-brand-400" aria-hidden="true" />
                     </div>
-                    <p className="text-sm text-slate-300">{issue}</p>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-slate-300 leading-snug">{issue.title}</p>
+                      <p className="text-xs text-slate-600 mt-0.5">{issue.date}</p>
+                    </div>
                   </div>
                 ))}
               </div>
 
               <p className="text-sm text-slate-500">
-                + {recentIssues.length * 10}+ more issues in the archive
+                + 40+ more issues in the archive
               </p>
             </div>
           </div>

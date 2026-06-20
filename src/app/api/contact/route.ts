@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const contactSchema = z.object({
   firstName: z.string().min(2),
@@ -19,55 +20,72 @@ const contactSchema = z.object({
   referrer: z.string().optional(),
 });
 
+const HOUR_MS = 60 * 60 * 1000;
+
 export async function POST(request: NextRequest) {
+  // IP-level rate limit: 3 contact submissions per hour
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  if (!checkRateLimit(`contact:ip:${ip}`, 3, HOUR_MS)) {
+    return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+  }
+
   try {
     const body = await request.json();
     const data = contactSchema.parse(body);
 
-    // =====================================================
-    // Connect your backend here — choose one or more:
-    // =====================================================
-
-    // 1. Send email via your SMTP provider (SendGrid, Resend, Postmark)
-    // await sendEmail({ to: 'hello@davidegpt.ai', subject: 'New Contact', data })
-
-    // 2. Add to HubSpot CRM
-    // await addHubSpotContact(data)
-
-    // 3. Post to Zapier webhook
-    // if (process.env.ZAPIER_WEBHOOK_URL) {
-    //   await fetch(process.env.ZAPIER_WEBHOOK_URL, {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(data),
-    //   })
-    // }
-
-    // 4. Post to GoHighLevel
-    // await addGHLContact(data)
-
-    // 5. Add to Airtable
-    // await createAirtableRecord(data)
-
-    // 6. Slack notification
-    // if (process.env.SLACK_WEBHOOK_URL) {
-    //   await fetch(process.env.SLACK_WEBHOOK_URL, {
-    //     method: 'POST',
-    //     body: JSON.stringify({ text: `New contact from ${data.firstName} ${data.lastName} — ${data.email}` }),
-    //   })
-    // }
-
-    console.log('[Contact Form]', {
-      name: `${data.firstName} ${data.lastName}`,
-      email: data.email,
-      interest: data.interest,
-      utmSource: data.utm_source,
-    });
+    // Send to Resend (or swap for another provider)
+    const resendKey = process.env.RESEND_API_KEY;
+    if (resendKey) {
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${resendKey}`,
+        },
+        body: JSON.stringify({
+          from: process.env.CONTACT_FROM_EMAIL ?? 'DavideGPT Contact <noreply@davidegpt.ai>',
+          to: [process.env.CONTACT_TO_EMAIL ?? 'hello@davidegpt.ai'],
+          reply_to: data.email,
+          subject: `New Contact: ${data.interest} — ${data.firstName} ${data.lastName}`,
+          text: [
+            `Name: ${data.firstName} ${data.lastName}`,
+            `Email: ${data.email}`,
+            data.phone ? `Phone: ${data.phone}` : null,
+            `Interest: ${data.interest}`,
+            ``,
+            `Message:`,
+            data.message,
+            ``,
+            data.utm_source ? `Source: ${data.utm_source}` : null,
+            data.utm_medium ? `Medium: ${data.utm_medium}` : null,
+            data.utm_campaign ? `Campaign: ${data.utm_campaign}` : null,
+            data.landing_page ? `Landing Page: ${data.landing_page}` : null,
+            data.referrer ? `Referrer: ${data.referrer}` : null,
+          ]
+            .filter(Boolean)
+            .join('\n'),
+        }),
+      }).then(async (r) => {
+        if (!r.ok) {
+          const err = await r.json().catch(() => ({}));
+          console.error('[Contact] Resend error', r.status, err);
+        }
+      });
+    } else {
+      // Fallback: log until RESEND_API_KEY is configured
+      console.log('[Contact Form]', {
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        interest: data.interest,
+        message: data.message,
+        utmSource: data.utm_source,
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid form data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Please check your form and try again.' }, { status: 400 });
     }
     console.error('[Contact API Error]', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

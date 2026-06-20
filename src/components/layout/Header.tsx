@@ -149,56 +149,65 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {mobileOpen && (
-        <div
-          id="mobile-menu"
-          className="lg:hidden fixed inset-0 top-16 bg-surface/98 backdrop-blur-xl z-50 overflow-y-auto"
-          aria-label="Mobile navigation"
-        >
-          <nav className="container-wide py-6 space-y-1">
-            {navigation.map((item) => (
-              <div key={item.label}>
-                <Link
-                  href={item.href}
-                  className={cn(
-                    'block px-4 py-3 rounded-xl text-base font-medium transition-colors',
-                    pathname === item.href || pathname.startsWith(item.href + '/')
-                      ? 'text-white bg-brand-500/15 text-brand-300'
-                      : 'text-slate-300 hover:text-white hover:bg-white/5'
+        <>
+          {/* Backdrop */}
+          <div
+            className="lg:hidden fixed inset-0 bg-black/60 z-40"
+            aria-hidden="true"
+            onClick={() => setMobileOpen(false)}
+          />
+          {/* Panel */}
+          <div
+            id="mobile-menu"
+            className="lg:hidden fixed top-16 left-0 right-0 bottom-0 bg-surface backdrop-blur-xl z-50 overflow-y-auto border-t border-white/[0.06]"
+            aria-label="Mobile navigation"
+          >
+            <nav className="container-wide py-6 space-y-1">
+              {navigation.map((item) => (
+                <div key={item.label}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      'block px-4 py-3.5 rounded-xl text-base font-medium transition-colors',
+                      pathname === item.href || pathname.startsWith(item.href + '/')
+                        ? 'text-brand-300 bg-brand-500/15'
+                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.children && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      {item.children.slice(1).map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-4 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
                   )}
-                >
-                  {item.label}
+                </div>
+              ))}
+              <div className="pt-4 space-y-3 border-t border-white/[0.08]">
+                <Link href="/newsletter" className="block">
+                  <Button variant="secondary" size="lg" fullWidth>
+                    Subscribe to Newsletter
+                  </Button>
                 </Link>
-                {item.children && (
-                  <div className="ml-4 mt-1 space-y-1">
-                    {item.children.slice(1).map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block px-4 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <Link href="/resources" className="block">
+                  <Button variant="primary" size="lg" fullWidth>
+                    Browse Free Resources
+                  </Button>
+                </Link>
               </div>
-            ))}
-            <div className="pt-4 space-y-3 border-t border-white/[0.08]">
-              <Link href="/newsletter" className="block">
-                <Button variant="secondary" size="lg" fullWidth>
-                  Subscribe to Newsletter
-                </Button>
-              </Link>
-              <Link href="/resources" className="block">
-                <Button variant="primary" size="lg" fullWidth>
-                  Browse Free Resources
-                </Button>
-              </Link>
-            </div>
-          </nav>
-        </div>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );
