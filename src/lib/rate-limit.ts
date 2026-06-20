@@ -3,9 +3,9 @@ const store = new Map<string, { count: number; resetAt: number }>();
 // Prune stale entries every 10 min to prevent unbounded growth
 setInterval(() => {
   const now = Date.now();
-  for (const [key, entry] of store) {
+  store.forEach((entry, key) => {
     if (now > entry.resetAt) store.delete(key);
-  }
+  });
 }, 10 * 60 * 1000).unref?.();
 
 /**
