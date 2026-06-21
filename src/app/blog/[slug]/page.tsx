@@ -65,6 +65,7 @@ export default async function BlogPostPage({ params }: Props) {
         description={post.excerpt}
         publishedAt={post.publishedAt}
         url={`${siteConfig.url}/blog/${post.slug}`}
+        image={post.thumbnail || undefined}
       />
       <SchemaMarkup
         type="breadcrumb"

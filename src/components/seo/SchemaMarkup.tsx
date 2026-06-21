@@ -12,6 +12,7 @@ interface ArticleSchemaProps {
   description: string;
   publishedAt: string;
   url: string;
+  image?: string;
 }
 interface FAQSchemaProps {
   type: 'faq';
@@ -79,6 +80,7 @@ export default function SchemaMarkup(props: SchemaProps) {
         url: siteConfig.url,
       },
       url: props.url,
+      ...(props.image && { image: props.image }),
     };
   }
 

@@ -7,8 +7,8 @@ export const contactSchema = z.object({
   phone: z.string().optional(),
   interest: z.string().min(1, 'Please select an option'),
   message: z.string().min(20, 'Message must be at least 20 characters'),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: 'You must agree to continue' }),
+  consent: z.boolean().refine((val) => val === true, {
+    message: 'You must agree to continue',
   }),
 });
 

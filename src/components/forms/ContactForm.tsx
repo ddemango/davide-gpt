@@ -38,7 +38,7 @@ export default function ContactForm() {
       phone: '',
       interest: '',
       message: '',
-      consent: false as unknown as true,
+      consent: false,
     },
   });
 
