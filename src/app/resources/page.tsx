@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { getResources } from '@/lib/notion';
 import SectionHeader from '@/components/ui/SectionHeader';
 import SchemaMarkup from '@/components/seo/SchemaMarkup';
@@ -17,13 +18,8 @@ export const metadata: Metadata = {
   },
 };
 
-interface PageProps {
-  searchParams: { category?: string };
-}
-
-export default async function ResourcesPage({ searchParams }: PageProps) {
+export default async function ResourcesPage() {
   const resources = await getResources();
-  const initialCategory = searchParams.category ?? 'All';
 
   return (
     <>
@@ -52,8 +48,10 @@ export default async function ResourcesPage({ searchParams }: PageProps) {
         </div>
       </section>
 
-      {/* Resources Grid with filters + search */}
-      <ResourcesGrid resources={resources} initialCategory={initialCategory} />
+      {/* Suspense required by useSearchParams inside ResourcesGrid */}
+      <Suspense>
+        <ResourcesGrid resources={resources} />
+      </Suspense>
     </>
   );
 }

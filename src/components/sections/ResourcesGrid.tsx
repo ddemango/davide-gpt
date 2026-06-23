@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Download, Lock, BookOpen, FileText, Video, Wrench, Layout, Search } from 'lucide-react';
@@ -21,13 +22,19 @@ const typeIcons: Record<Resource['type'], React.ElementType> = {
 
 interface Props {
   resources: Resource[];
-  initialCategory?: string;
 }
 
-export default function ResourcesGrid({ resources, initialCategory = 'All' }: Props) {
-  const [activeCategory, setActiveCategory] = useState(initialCategory);
+export default function ResourcesGrid({ resources }: Props) {
+  const searchParams = useSearchParams();
+  const [activeCategory, setActiveCategory] = useState('All');
   const [query, setQuery] = useState('');
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+
+  // Sync active category from URL on mount and on URL changes
+  useEffect(() => {
+    const cat = searchParams.get('category');
+    setActiveCategory(cat ?? 'All');
+  }, [searchParams]);
 
   // Derive categories from actual data, keeping a consistent order
   const categories = useMemo(() => {
