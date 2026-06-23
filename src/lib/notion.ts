@@ -171,11 +171,15 @@ export async function getResources(): Promise<Resource[]> {
       sorts: [{ property: 'Published', direction: 'descending' }],
     });
 
-    const mapped = (response.results as NotionPage[])
+    const notionResources = (response.results as NotionPage[])
       .map(mapResourcePage)
       .filter((r): r is Resource => r !== null);
 
-    return mapped.length > 0 ? mapped : staticResources;
+    // Always include static resources not present in Notion so locally-added
+    // resources show up even when Notion is configured.
+    const notionSlugs = new Set(notionResources.map((r) => r.slug));
+    const staticOnly = staticResources.filter((r) => !notionSlugs.has(r.slug));
+    return [...notionResources, ...staticOnly];
   } catch (err) {
     console.error('[Notion] getResources failed:', err);
     return staticResources;
