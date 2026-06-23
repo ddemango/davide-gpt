@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getResourceBySlug, getResourceContent } from '@/lib/notion';
 import { checkRateLimit } from '@/lib/rate-limit';
+import { staticResourceContent } from '@/lib/static-resource-content';
 
 const schema = z.object({
   email: z.string().email(),
@@ -71,7 +72,8 @@ export async function POST(
       return NextResponse.json({ error: 'Resource not found' }, { status: 404 });
     }
 
-    const content = resource.notionId ? await getResourceContent(resource.notionId) : '';
+    const notionContent = resource.notionId ? await getResourceContent(resource.notionId) : '';
+    const content = notionContent || staticResourceContent[params.slug] || '';
 
     if (!content) {
       return NextResponse.json({ error: 'Content not available yet' }, { status: 404 });

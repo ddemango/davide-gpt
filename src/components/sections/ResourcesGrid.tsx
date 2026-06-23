@@ -9,7 +9,7 @@ import Card from '@/components/ui/Card';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import type { Resource } from '@/types';
 
-const STATIC_CATEGORIES = ['All', 'ChatGPT', 'Claude', 'Content', 'Productivity', 'Business', 'Tools'];
+const STATIC_CATEGORIES = ['All', 'ChatGPT', 'Prompt Packs', 'Toolkits', 'Videos', 'Claude', 'Productivity', 'Business', 'Tools'];
 
 const typeIcons: Record<Resource['type'], React.ElementType> = {
   Guide: BookOpen,
@@ -21,10 +21,11 @@ const typeIcons: Record<Resource['type'], React.ElementType> = {
 
 interface Props {
   resources: Resource[];
+  initialCategory?: string;
 }
 
-export default function ResourcesGrid({ resources }: Props) {
-  const [activeCategory, setActiveCategory] = useState('All');
+export default function ResourcesGrid({ resources, initialCategory = 'All' }: Props) {
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [query, setQuery] = useState('');
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 

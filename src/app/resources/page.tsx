@@ -17,8 +17,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ResourcesPage() {
+interface PageProps {
+  searchParams: { category?: string };
+}
+
+export default async function ResourcesPage({ searchParams }: PageProps) {
   const resources = await getResources();
+  const initialCategory = searchParams.category ?? 'All';
 
   return (
     <>
@@ -48,7 +53,7 @@ export default async function ResourcesPage() {
       </section>
 
       {/* Resources Grid with filters + search */}
-      <ResourcesGrid resources={resources} />
+      <ResourcesGrid resources={resources} initialCategory={initialCategory} />
     </>
   );
 }

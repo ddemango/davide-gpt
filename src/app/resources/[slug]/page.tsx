@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { resources } from '@/lib/data';
 import { getResourceBySlug, getResources } from '@/lib/notion';
+import { staticResourceContent } from '@/lib/static-resource-content';
 import Badge from '@/components/ui/Badge';
 import Card from '@/components/ui/Card';
 import SectionWrapper from '@/components/ui/SectionWrapper';
@@ -54,7 +55,7 @@ export default async function ResourcePage({ params }: Props) {
   ]);
   if (!resource) notFound();
 
-  const hasContent = !!resource.notionId;
+  const hasContent = !!resource.notionId || !!staticResourceContent[params.slug];
 
   const related = allResources
     .filter((r) => r.slug !== resource.slug && r.category === resource.category)
