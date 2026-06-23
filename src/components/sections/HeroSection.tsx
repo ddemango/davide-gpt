@@ -34,7 +34,7 @@ export default function HeroSection() {
           <div className="mb-6 flex justify-center">
             <Badge variant="brand" size="md">
               <Star className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
-              Trusted by 500K+ AI Learners Worldwide
+              35K+ Followers — Practical AI Education
             </Badge>
           </div>
 
@@ -93,26 +93,18 @@ export default function HeroSection() {
                   </div>
                 ))}
               </div>
-              <span>
-                <strong className="text-white">50,000+</strong> students taught
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star
-                  key={i}
-                  className="h-4 w-4 fill-amber-400 text-amber-400"
-                  aria-hidden="true"
-                />
-              ))}
-              <span>
-                <strong className="text-white">4.9/5</strong> rating
-              </span>
+              <span>Join a growing community</span>
             </div>
             <div className="flex items-center gap-2">
               <BookOpen className="h-4 w-4 text-brand-400" aria-hidden="true" />
               <span>
-                <strong className="text-white">200+</strong> free resources
+                <strong className="text-white">50+</strong> free resources
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users className="h-4 w-4 text-brand-400" aria-hidden="true" />
+              <span>
+                <strong className="text-white">35K+</strong> followers
               </span>
             </div>
           </div>
@@ -166,15 +158,15 @@ export default function HeroSection() {
           <div className="absolute -left-4 top-1/4 hidden md:flex items-center gap-2 rounded-xl bg-surface-2 border border-white/[0.08] px-4 py-3 shadow-xl">
             <Users className="h-5 w-5 text-brand-400" />
             <div>
-              <p className="text-xs font-bold text-white">500K+</p>
+              <p className="text-xs font-bold text-white">35K+</p>
               <p className="text-xs text-slate-500">Followers</p>
             </div>
           </div>
           <div className="absolute -right-4 bottom-1/4 hidden md:flex items-center gap-2 rounded-xl bg-surface-2 border border-white/[0.08] px-4 py-3 shadow-xl">
-            <Star className="h-5 w-5 text-amber-400 fill-amber-400" />
+            <BookOpen className="h-5 w-5 text-brand-400" />
             <div>
-              <p className="text-xs font-bold text-white">4.9 / 5</p>
-              <p className="text-xs text-slate-500">Avg Rating</p>
+              <p className="text-xs font-bold text-white">50+</p>
+              <p className="text-xs text-slate-500">Free Resources</p>
             </div>
           </div>
         </div>

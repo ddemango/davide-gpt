@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AboutPhoto from '@/components/ui/AboutPhoto';
 import {
   Youtube, Instagram, Twitter, Linkedin, ArrowRight,
-  CheckCircle2, Calendar, Users, BookOpen, Star
+  CheckCircle2, Calendar
 } from 'lucide-react';
 import SectionWrapper from '@/components/ui/SectionWrapper';
 import SectionHeader from '@/components/ui/SectionHeader';
@@ -18,7 +18,7 @@ import { siteConfig, stats } from '@/lib/data';
 export const metadata: Metadata = {
   title: 'About Davide — AI Educator & Content Creator',
   description:
-    'Meet Davide — the AI educator behind DavideGPT with 500K+ followers. Learn about his mission to make AI accessible to everyone through practical, jargon-free education.',
+    'Meet Davide — the AI educator behind DavideGPT. Learn about his mission to make AI accessible to everyone through practical, jargon-free education.',
   alternates: { canonical: '/about' },
 };
 
@@ -29,10 +29,10 @@ const milestones = [
 ];
 
 const socialLinks = [
-  { label: 'YouTube', href: siteConfig.social.youtube, icon: Youtube, count: '200K+' },
-  { label: 'Instagram', href: siteConfig.social.instagram, icon: Instagram, count: '180K+' },
-  { label: 'Twitter/X', href: siteConfig.social.twitter, icon: Twitter, count: '80K+' },
-  { label: 'LinkedIn', href: siteConfig.social.linkedin, icon: Linkedin, count: '40K+' },
+  { label: 'YouTube', href: siteConfig.social.youtube, icon: Youtube, cta: 'Subscribe' },
+  { label: 'Instagram', href: siteConfig.social.instagram, icon: Instagram, cta: 'Follow' },
+  { label: 'Twitter/X', href: siteConfig.social.twitter, icon: Twitter, cta: 'Follow' },
+  { label: 'LinkedIn', href: siteConfig.social.linkedin, icon: Linkedin, cta: 'Connect' },
 ];
 
 const values = [
@@ -132,13 +132,13 @@ export default function AboutPage() {
                 but with the gap between what most people thought it could do and what it was actually capable of.
               </p>
               <p>
-                I started making short tutorial videos explaining how to use AI tools in plain English. Within 60
-                days, I had 10,000 followers. Within a year, over 200,000. The message was clear: people desperately
-                wanted someone to cut through the hype and just show them how to use these tools.
+                I started making short tutorial videos explaining how to use AI tools in plain English. The response
+                was clear from the start: people desperately wanted someone to cut through the hype and just show
+                them how to use these tools in real life.
               </p>
               <p>
-                Today, DavideGPT is home to 200+ free resources, a weekly newsletter reaching 30,000+ subscribers,
-                and a growing community of people actively transforming how they work with AI.
+                Today, DavideGPT is home to 50+ free resources, a growing weekly newsletter, and a community of
+                people actively transforming how they work with AI.
               </p>
               <p>
                 My goal remains the same as it was on day one: make AI education accessible, practical, and genuinely
@@ -196,7 +196,7 @@ export default function AboutPage() {
           description="I publish AI tips, tutorials, and tool reviews across every major platform."
         />
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {socialLinks.map(({ label, href, icon: Icon, count }) => (
+          {socialLinks.map(({ label, href, icon: Icon, cta }) => (
             <a
               key={label}
               href={href}
@@ -208,7 +208,7 @@ export default function AboutPage() {
                 <div className="h-12 w-12 rounded-xl bg-brand-500/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-brand-500/20 transition-colors">
                   <Icon className="h-6 w-6 text-brand-400" aria-hidden="true" />
                 </div>
-                <p className="font-display text-2xl font-bold text-white mb-1">{count}</p>
+                <p className="font-semibold text-white mb-1">{cta} ↗</p>
                 <p className="text-sm text-slate-400">{label}</p>
               </Card>
             </a>

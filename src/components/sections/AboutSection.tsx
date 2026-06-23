@@ -10,8 +10,8 @@ import { siteConfig } from '@/lib/data';
 
 const highlights = [
   'Teaching AI to everyday people since 2022',
-  '500K+ followers across YouTube, Instagram & TikTok',
-  'Helped 50,000+ students learn AI tools practically',
+  '35K+ followers across YouTube, Instagram & TikTok',
+  'Building a growing community of everyday AI learners',
   'No-fluff approach — only what actually works',
   'Updated weekly with the latest AI tool breakdowns',
 ];
@@ -40,19 +40,19 @@ export default function AboutSection() {
               <p className="text-slate-400 text-sm">[ Photo of Davide ]</p>
             </div>
 
-            {/* Social stats overlay */}
+            {/* Social platforms overlay */}
             <div className="absolute bottom-4 left-4 right-4 flex gap-3">
               {[
-                { icon: Youtube, platform: 'YouTube', count: '200K+' },
-                { icon: Instagram, platform: 'Instagram', count: '180K+' },
-                { icon: Twitter, platform: 'TikTok', count: '120K+' },
-              ].map(({ icon: Icon, platform, count }) => (
+                { icon: Youtube, platform: 'YouTube', label: 'Subscribe' },
+                { icon: Instagram, platform: 'Instagram', label: 'Follow' },
+                { icon: Twitter, platform: 'TikTok', label: 'Follow' },
+              ].map(({ icon: Icon, platform, label }) => (
                 <div
                   key={platform}
                   className="flex-1 rounded-xl bg-black/40 backdrop-blur-sm border border-white/10 p-3 text-center"
                 >
                   <Icon className="h-4 w-4 text-white mx-auto mb-1" />
-                  <p className="text-xs font-bold text-white">{count}</p>
+                  <p className="text-xs font-bold text-white">{label}</p>
                   <p className="text-xs text-slate-500">{platform}</p>
                 </div>
               ))}

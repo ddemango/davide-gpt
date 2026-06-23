@@ -1861,4 +1861,1302 @@ The tools in this guide are updated annually. The principles of how to evaluate 
 ---
 Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
 `,
+
+  'chatgpt-for-students': `CHATGPT FOR STUDENTS: STUDY SMARTER WITH AI
+By DavideGPT — davidegpt.ai
+==============================================
+
+This guide is not about cheating. It's about using AI the way the best students already do —
+to understand things faster, practise more effectively, and get better feedback.
+
+THE 5 BEST STUDENT USE CASES
+------------------------------
+
+1. UNDERSTAND ANY CONCEPT INSTANTLY
+   "Explain [concept] like I'm 16. Use a real-world example. Then give me 3 follow-up questions I should be able to answer."
+   Works for: maths, economics, science, history, law — anything.
+
+2. ESSAY BRAINSTORMING (NOT WRITING)
+   Use AI to generate an argument structure, not to write your essay.
+   "Give me 5 different angles I could take for an essay on [topic]. For each one, list 3 supporting points."
+   Then YOU write the essay. Your argument, your words.
+
+3. ACTIVE RECALL PRACTICE
+   "I'm studying [topic]. Generate 10 exam-style questions at [difficulty level]. After I answer, tell me what I got right, what I got wrong, and what I missed."
+   Best study method: tested by science, supercharged by AI.
+
+4. SIMPLIFY DENSE READINGS
+   "Here is a paragraph from my textbook: [PASTE TEXT]. Explain it in plain English, then summarise it in 2 sentences."
+   Saves hours on dense academic texts.
+
+5. GET FEEDBACK ON YOUR WORK
+   "Here is my essay draft: [PASTE]. Act as a tough but fair professor. Give me specific feedback on: argument clarity, evidence quality, structure, and writing quality."
+   Better feedback than most students ever get.
+
+WHAT NOT TO USE AI FOR
+------------------------
+- Don't submit AI-written work as your own. It's dishonest and detectable.
+- Don't use it to skip reading — use it to understand what you've read.
+- Don't rely on it for facts without checking. AI can be wrong.
+
+POWER PROMPTS FOR STUDENTS
+----------------------------
+1. "Create a 1-page study guide for [topic] with key terms, main ideas, and 5 practice questions."
+2. "I have an exam on [subject] in [X days]. Build me a study schedule."
+3. "Make the concept of [topic] memorable with an analogy or story."
+4. "I'm writing a [type] essay. Here's my thesis: [THESIS]. Is it arguable, specific, and strong? How can I improve it?"
+5. "Summarise this research paper in 5 bullet points: [PASTE ABSTRACT]."
+6. "I don't understand why [concept] works this way. Walk me through the logic step by step."
+7. "Give me 10 flashcard questions and answers for [topic]."
+8. "What are the most common mistakes students make when answering questions about [topic]? How do I avoid them?"
+9. "Compare and contrast [concept A] and [concept B]. Use a table."
+10. "I got [GRADE] on this essay. Here's the feedback: [PASTE]. What should I improve in my next draft?"
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'chatgpt-custom-instructions-guide': `THE CUSTOM INSTRUCTIONS GUIDE FOR CHATGPT
+By DavideGPT — davidegpt.ai
+============================================
+
+Custom Instructions tell ChatGPT who you are and how you want it to respond —
+so you don't have to repeat yourself every single conversation.
+Set this up once and your results improve immediately.
+
+HOW TO SET UP CUSTOM INSTRUCTIONS
+------------------------------------
+1. Click your profile picture (bottom-left in ChatGPT)
+2. Go to "Customise ChatGPT"
+3. Fill in the two fields below
+
+FIELD 1: "What would you like ChatGPT to know about you?"
+Tell it about yourself: who you are, what you do, what you're working on.
+
+TEMPLATE:
+"I am [YOUR ROLE] at/for [YOUR CONTEXT]. I primarily use ChatGPT for [USE CASES].
+My level of technical knowledge is [BEGINNER / INTERMEDIATE / ADVANCED].
+Key context about my work: [ANYTHING RELEVANT — niche, industry, audience, goals]."
+
+REAL EXAMPLE:
+"I am a freelance content writer working primarily for SaaS and B2B clients.
+I use ChatGPT for writing assistance, content research, and client communication.
+My knowledge level is intermediate. I write for marketing managers and founders,
+not technical audiences. My clients are mostly UK-based."
+
+FIELD 2: "How would you like ChatGPT to respond?"
+Tell it your preferences: tone, length, format, things to avoid.
+
+TEMPLATE:
+"Please respond in a [TONE] tone. Keep responses [LENGTH PREFERENCE].
+Format responses using [BULLET POINTS / HEADERS / PLAIN TEXT] when appropriate.
+Avoid [THINGS YOU DISLIKE — jargon, filler phrases, over-explaining].
+When I ask for [SPECIFIC THING], always [SPECIFIC INSTRUCTION]."
+
+REAL EXAMPLE:
+"Respond in a direct, professional but conversational tone.
+Avoid filler phrases like 'Great question!' or 'Certainly!'
+Keep responses focused — don't pad with unnecessary context.
+When I ask for copy, give me 2-3 variations so I can choose.
+Use British English spelling. Format longer responses with clear headers."
+
+SETUPS FOR DIFFERENT USERS
+-----------------------------
+
+FOR ENTREPRENEURS:
+Field 1: "I run a small business selling [PRODUCT/SERVICE] to [AUDIENCE]. My biggest challenges are [X, Y, Z]."
+Field 2: "Help me think like a business owner. Be direct. Give actionable advice, not generic tips. Format recommendations as numbered action steps."
+
+FOR MARKETERS:
+Field 1: "I'm a marketing manager at [COMPANY TYPE]. I work on [EMAIL/SOCIAL/ADS/CONTENT]. My audience is [DESCRIBE]."
+Field 2: "Write in a persuasive but not salesy tone. Always consider the audience perspective. When writing copy, give me 3 variations. Use short sentences."
+
+FOR STUDENTS:
+Field 1: "I'm a [SUBJECT] student at [LEVEL]. I use ChatGPT to help me understand complex topics and improve my academic writing."
+Field 2: "Explain concepts clearly, with examples. When I share my writing, give specific, actionable feedback. Don't write things for me — guide me to improve my own work."
+
+FOR DEVELOPERS:
+Field 1: "I'm a [FRONTEND / BACKEND / FULL-STACK] developer primarily working in [LANGUAGES]. I'm [JUNIOR/SENIOR LEVEL]."
+Field 2: "When giving code examples, use [LANGUAGE]. Comment code clearly. If there are multiple approaches, explain trade-offs. Prefer clean, readable code over clever one-liners."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'chatgpt-for-job-seekers': `CHATGPT FOR JOB SEEKERS: CV, INTERVIEWS & MORE
+By DavideGPT — davidegpt.ai
+=================================================
+
+AI won't get you the job. But it will help you compete better.
+Here's how to use ChatGPT at every stage of your job search.
+
+STEP 1: WRITE A STRONGER CV
+-----------------------------
+Prompt: "Here is my current CV: [PASTE CV]. I'm applying for [JOB TITLE] roles.
+Rewrite my bullet points to be achievement-focused, not task-focused.
+Use strong action verbs. Quantify results where possible."
+
+Tailoring for each role:
+"Here is my CV: [PASTE]. Here is the job description: [PASTE].
+Identify the gaps and tell me which parts of my CV to emphasise or rewrite
+to better match this role."
+
+STEP 2: WRITE COVER LETTERS THAT DON'T SOUND GENERIC
+-------------------------------------------------------
+Prompt: "Write a cover letter for [JOB TITLE] at [COMPANY NAME].
+Here's the job description: [PASTE].
+Here's my background: [2-3 SENTENCES].
+Tone: professional but human. Length: 3 short paragraphs.
+Don't start with 'I am writing to apply...' — start with something engaging."
+
+Then personalise it. Add a real detail about why you want that specific role.
+AI gives you the structure; you add the authenticity.
+
+STEP 3: PREPARE FOR INTERVIEWS
+--------------------------------
+"I have an interview for [JOB TITLE] at [COMPANY] next week.
+Give me the 10 most likely interview questions for this role.
+For each question, suggest what a strong answer should cover."
+
+Then practise:
+"Ask me [QUESTION]. I'll answer. Then give me honest feedback on:
+- Was my answer clear and structured?
+- Did I give a specific example?
+- What should I add or cut?"
+
+STEP 4: RESEARCH THE COMPANY
+------------------------------
+"Help me research [COMPANY NAME] before an interview. What should I know about:
+- Their products/services
+- Their recent news or growth
+- Their culture and values
+- Smart questions I could ask the interviewer"
+
+STEP 5: NEGOTIATE YOUR SALARY
+-------------------------------
+"I've been offered [SALARY] for [JOB TITLE] in [CITY/INDUSTRY].
+Is this above or below market rate? How should I approach negotiation?
+Give me the exact words I could use to counter-offer professionally."
+
+BONUS: LINKEDIN PROFILE OPTIMISATION
+--------------------------------------
+"Here is my LinkedIn summary: [PASTE].
+Rewrite it to be compelling to [TYPE OF EMPLOYER] looking for [SKILLS].
+Use first person. Keep it under 200 words. Make it specific, not generic."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'chatgpt-writing-guide': `USING CHATGPT AS YOUR PERSONAL WRITING COACH
+By DavideGPT — davidegpt.ai
+===============================================
+
+ChatGPT doesn't replace your voice — it helps you find it.
+Here's how to use AI to become a better writer, faster.
+
+THE CORE PRINCIPLE
+-------------------
+Use ChatGPT as an editor and thought partner, not as a ghostwriter.
+The best results come when you write first, then use AI to improve.
+
+5 WAYS TO USE CHATGPT FOR WRITING
+------------------------------------
+
+1. BEAT WRITER'S BLOCK
+"I need to write about [TOPIC] for [AUDIENCE]. I'm stuck. Give me 5 different opening
+sentences I could use. Make them each use a different hook: story, statistic, bold claim,
+question, and contrast."
+
+2. EDIT YOUR DRAFTS
+"Here is my draft: [PASTE TEXT].
+Edit for: clarity, conciseness, and flow.
+Flag any sentences that are confusing or too long.
+Don't change my voice — just tighten what's there."
+
+3. MATCH A TONE OR STYLE
+"Here is a sample of my writing: [PASTE 2-3 PARAGRAPHS].
+Study my style: vocabulary, sentence length, tone.
+Now write a new section on [TOPIC] that matches my voice exactly."
+
+4. SIMPLIFY COMPLEX IDEAS
+"I need to explain [TECHNICAL CONCEPT] to [AUDIENCE — e.g. non-technical business owners].
+Write a 3-paragraph explanation using plain language and a real-world analogy."
+
+5. WRITE STRONGER HEADLINES AND HOOKS
+"Here are 5 headline options I'm considering for my article: [LIST].
+Rank them by likely click-through rate and tell me why. Then give me 3 better alternatives."
+
+WRITING PROMPTS THAT WORK
+---------------------------
+- "Make this shorter without losing the key points: [PASTE]"
+- "This paragraph is confusing. Rewrite it so a 12-year-old could understand it: [PASTE]"
+- "Add more personality to this: [PASTE]. Don't make it unprofessional, just more human."
+- "I'm writing a [BLOG / EMAIL / REPORT]. Give me a structure with headers."
+- "Give me 3 different ways to end this piece that feel memorable: [PASTE BODY]"
+- "Write a P.S. for this email that creates urgency without being pushy: [PASTE EMAIL]"
+- "My first draft: [PASTE]. What's missing? What should I cut? What's the strongest part?"
+
+THE GOLDEN RULE
+----------------
+Always read the AI output out loud. If it doesn't sound like you, rewrite it.
+The goal is AI-assisted writing that still sounds completely human.
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'chatgpt-plugins-gpts-guide': `CHATGPT GPTs: HOW TO FIND AND USE THE BEST ONES
+By DavideGPT — davidegpt.ai
+==================================================
+
+GPTs are custom versions of ChatGPT built for specific tasks.
+Instead of crafting complex prompts from scratch, you use a GPT that already knows
+exactly what to do. Here's how to find the best ones and build your own.
+
+HOW TO ACCESS THE GPT STORE
+-----------------------------
+1. Open ChatGPT (you need a Plus or higher account)
+2. Click "Explore GPTs" in the left sidebar
+3. Browse by category or search for what you need
+
+THE BEST GPTs BY CATEGORY
+---------------------------
+
+FOR WRITING & CONTENT:
+- "Write For Me" — adapts to your style and writes long-form content
+- "Humanise" — rewrites AI text to sound more natural
+- "SEO Content Optimiser" — helps rank content on Google
+
+FOR PRODUCTIVITY:
+- "Consensus" — searches academic papers and gives evidence-based answers
+- "Diagrams: Show Me" — creates charts, flows, and diagrams from text
+- "Canva" — design assets directly from ChatGPT
+
+FOR CODING:
+- "Code Copilot" — writes and debugs code across all languages
+- "AI Code Reviewer" — reviews your code for issues and improvements
+
+FOR RESEARCH:
+- "Scholar AI" — searches real academic research with citations
+- "WebPilot" — browses live websites and summarises content
+
+FOR BUSINESS:
+- "Sales GPT" — helps with cold outreach, pitches, and sales copy
+- "Marketing Strategy" — builds marketing plans and campaigns
+
+HOW TO BUILD YOUR OWN GPT (NO CODING)
+----------------------------------------
+1. Click your profile → "My GPTs" → "Create a GPT"
+2. Tell the builder what your GPT should do:
+   "Create a GPT that acts as a [ROLE]. It should always [BEHAVIOUR].
+   It responds in [TONE]. When asked to do [X], it always does [Y]."
+3. Add a name, description, and profile image
+4. Set it to Private (just for you) or Public (for anyone to use)
+
+USE CASE IDEAS FOR CUSTOM GPTs:
+- Your personal writing coach with your style guide
+- A client FAQ bot that knows your business
+- A content idea generator tuned to your niche
+- A code reviewer that follows your team's standards
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'ai-for-teachers-guide': `AI FOR TEACHERS: SAVE HOURS ON LESSON PLANNING
+By DavideGPT — davidegpt.ai
+==================================================
+
+AI won't replace teachers. But teachers who use AI will teach more effectively
+and spend far less time on the administrative work that burns people out.
+
+THE TOP 7 TEACHER USE CASES
+------------------------------
+
+1. LESSON PLANNING IN MINUTES
+"Create a 45-minute lesson plan for [SUBJECT], [GRADE LEVEL], on the topic of [TOPIC].
+Include: learning objectives, warm-up activity, main activity, discussion questions, and assessment idea.
+Curriculum reference: [e.g. UK KS3 / US Common Core Grade 8]."
+
+2. DIFFERENTIATION — THREE LEVELS AT ONCE
+"Here is a reading on [TOPIC]: [PASTE].
+Create three versions: one for below-grade-level readers, one on-grade, one above.
+Keep the core content the same but adjust vocabulary and sentence complexity."
+
+3. QUIZ AND WORKSHEET GENERATION
+"Create a 10-question multiple-choice quiz on [TOPIC] for [GRADE LEVEL].
+Include an answer key. Mix recall, comprehension, and application questions."
+
+4. WRITING BETTER STUDENT FEEDBACK
+"Here is a student's essay: [PASTE].
+Write specific, encouraging, and actionable feedback in under 100 words.
+Focus on [structure / argument / evidence / expression]. Suggest one concrete improvement."
+
+5. PARENT COMMUNICATION
+"Draft a professional but warm email to a parent about [SITUATION — e.g. student progress,
+behaviour issue, upcoming event]. Tone: honest, constructive, solution-focused."
+
+6. CREATE DISCUSSION QUESTIONS
+"Generate 8 Socratic discussion questions for a class studying [TOPIC/BOOK/FILM].
+Mix factual, inferential, and evaluative questions. Suitable for [AGE GROUP]."
+
+7. WRITE REPORT CARD COMMENTS
+"Write 3 different report card comments for a student who is [describe performance briefly].
+Each should be positive but honest, specific, and under 60 words."
+
+ETHICAL GUIDELINES FOR TEACHERS USING AI
+-------------------------------------------
+- Always review and personalise AI-generated content before using it
+- Be transparent with your school leadership about how you use AI
+- Teach students about AI alongside using it — it's a life skill they need
+- Don't use AI to write personalised feedback without adding your own observations
+
+TOOLS TO KNOW
+--------------
+- ChatGPT (chatgpt.com) — best for lesson planning and writing
+- Curipod (curipod.com) — AI-powered interactive lessons
+- MagicSchool.ai — purpose-built AI tools for educators
+- Diffit (diffit.me) — differentiated reading passages by level
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'ai-newsletter-writing-guide': `WRITE BETTER NEWSLETTERS WITH AI
+By DavideGPT — davidegpt.ai
+===================================
+
+A good newsletter gets opened, read, and clicked. Most don't.
+Here's how to use AI to write newsletters people actually look forward to receiving.
+
+THE ANATOMY OF A GREAT NEWSLETTER
+------------------------------------
+1. Subject line (determines if it gets opened)
+2. Preview text (the teaser after the subject)
+3. Opening hook (first 2 sentences — make them read on)
+4. Main content (the value)
+5. CTA (one clear action)
+6. Sign-off (your personality)
+
+AI PROMPTS FOR EACH SECTION
+------------------------------
+
+SUBJECT LINES:
+"Write 10 subject lines for a newsletter about [TOPIC].
+Include: 3 curiosity-based, 3 benefit-based, 2 questions, 2 that use numbers.
+For a [NICHE] audience. Keep each under 50 characters."
+
+PREVIEW TEXT:
+"Write 5 preview text options (under 90 characters each) for a newsletter with this subject: [SUBJECT].
+Preview text should tease what's inside without giving it away."
+
+OPENING HOOK:
+"Write 3 different opening hooks for a newsletter about [TOPIC].
+Options: start with a story, start with a surprising fact, start with a bold statement.
+The reader is a [DESCRIBE AUDIENCE]. Make them want to keep reading."
+
+MAIN CONTENT:
+"I'm writing a newsletter issue about [TOPIC]. The key points I want to cover are: [LIST].
+Write the body in a conversational, direct tone. Use short paragraphs.
+Include one real example or story. Length: 300-400 words."
+
+CTA:
+"Write 3 CTA options for a newsletter ending that wants readers to [ACTION — e.g. download a resource / reply / click a link].
+Make them feel natural, not pushy. One sentence each."
+
+SIGN-OFF:
+"Write 3 warm but professional sign-off options for a newsletter. My name is Davide.
+They should feel personal and consistent with a direct, honest tone."
+
+CONSISTENCY IS EVERYTHING
+---------------------------
+The best newsletters have a consistent:
+- Format (readers know what to expect)
+- Voice (don't let AI make it sound generic)
+- Frequency (weekly beats monthly)
+
+Always read your AI-drafted newsletter out loud before sending.
+If it sounds like a robot wrote it, rewrite the parts that do.
+
+TOOLS TO USE ALONGSIDE AI
+---------------------------
+- Beehiiv, ConvertKit, or Mailchimp — newsletter platforms
+- ChatGPT or Claude — drafting and editing
+- Canva — simple visual headers
+- Headline Analyser (coschedule.com) — score your subject lines
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'freelancer-pitch-prompt-pack': `20 FREELANCER PITCH & PROPOSAL PROMPTS
+By DavideGPT — davidegpt.ai
+=========================================
+
+Stop losing clients to poor pitches. These 20 prompts help you write
+winning proposals, outreach messages, and follow-ups that convert.
+
+HOW TO USE THESE PROMPTS
+--------------------------
+Replace [BRACKETS] with your specific details.
+Always personalise before sending — never send AI copy verbatim.
+
+THE 20 PROMPTS
+---------------
+
+COLD OUTREACH (1-5)
+1. "Write a cold email from a freelance [YOUR SKILL] to a potential client in [INDUSTRY].
+   Their pain point is [PROBLEM]. My unique angle is [YOUR DIFFERENTIATOR].
+   Length: under 100 words. Tone: direct, confident, human. Include a specific CTA."
+
+2. "Write a LinkedIn connection message to a [JOB TITLE] at [TYPE OF COMPANY].
+   I want to offer [SERVICE]. Keep it under 300 characters. No pitching in the first message."
+
+3. "I found a job posting on [PLATFORM] for [ROLE]. Write a cover letter that stands out.
+   Avoid generic openers. Start with a specific insight about their business or need."
+
+4. "Write a cold DM for Instagram to a [TYPE OF BUSINESS OWNER] who posts about [NICHE].
+   I offer [SERVICE]. Keep it casual, under 3 sentences, no emoji overload."
+
+5. "Write an email follow-up to a prospect who didn't respond to my first outreach 5 days ago.
+   First email was about [TOPIC]. Keep it short — 2-3 sentences, add a new angle or value."
+
+PROPOSALS (6-10)
+6. "Write a project proposal for a [PROJECT TYPE] for a client in [INDUSTRY].
+   Scope: [BRIEF DESCRIPTION]. Timeline: [X WEEKS]. Budget: [$AMOUNT].
+   Structure: Overview, Deliverables, Timeline, Investment, Next Steps."
+
+7. "Write an executive summary for a freelance proposal. The client needs [OUTCOME].
+   I will deliver [DELIVERABLES] in [TIMELINE]. Make it confident and client-focused."
+
+8. "My client said the budget is too high. Write a response that holds my price
+   while offering flexibility — e.g. a phased scope or reduced deliverables."
+
+9. "Write a value section for my proposal explaining why [PRICE] is justified.
+   Focus on ROI and outcomes, not on hours worked."
+
+10. "Write a professional but warm closing section for a proposal that creates urgency
+    and includes a clear next step — without sounding desperate."
+
+FOLLOW-UPS (11-15)
+11. "Write a follow-up email 3 days after sending a proposal that got no response.
+    Keep it short — check in, add one new piece of value, and make it easy to say yes."
+
+12. "Write a follow-up to a prospect who said 'maybe next month'. My goal is to stay
+    warm without being annoying. Remind them of the value I offer."
+
+13. "Write a 'just checking in' email that doesn't sound like a 'just checking in' email."
+
+14. "The client went quiet after our call. Write a reconnect email for 2 weeks later.
+    Reference something specific from our conversation to show I was paying attention."
+
+15. "Write a polite final follow-up — the last message before I stop pursuing this lead.
+    Leave the door open for the future without burning the bridge."
+
+OBJECTION HANDLING (16-20)
+16. "A prospect said: 'We might do this in-house instead.' Write a reply that
+    acknowledges their concern and repositions my value without being pushy."
+
+17. "A client said: 'We've worked with agencies before and it didn't go well.'
+    Write a response that addresses their concern and builds trust."
+
+18. "A prospect said: 'Can you do it cheaper?' Write 3 different responses:
+    one that holds the price, one that offers a smaller scope, one that offers a payment plan."
+
+19. "A client is slow to sign the contract. Write a message that creates gentle urgency
+    — referencing my availability — without being aggressive."
+
+20. "A prospect said: 'We're not sure we have the budget.' Write a response that
+    reframes the conversation around ROI and helps them see this as an investment."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'social-media-growth-prompts': `30 SOCIAL MEDIA GROWTH PROMPTS
+By DavideGPT — davidegpt.ai
+================================
+
+Grow your audience on Instagram, TikTok, LinkedIn, and YouTube
+with 30 proven AI prompts for hooks, captions, and content strategies.
+
+HOOKS & OPENING LINES (1-8)
+------------------------------
+1. "Write 5 hook sentences for a [PLATFORM] post about [TOPIC] that make people stop scrolling.
+   My audience is [DESCRIBE]. Avoid clickbait — just be genuinely interesting."
+
+2. "Rewrite this hook to be more compelling: [PASTE YOUR HOOK].
+   Give me 3 alternatives — different styles: bold claim, curiosity, story."
+
+3. "Write 10 hooks for short-form video (TikTok/Reels) on the topic of [TOPIC].
+   Each hook should work in the first 3 seconds. Use pattern interrupts."
+
+4. "What are the most common mistakes people make when posting about [TOPIC]?
+   Turn each mistake into a hook I could use for a post."
+
+5. "Give me 5 contrarian hooks about [TOPIC] — opinions that go against common advice
+   but are defensible. My niche is [NICHE]."
+
+6. "Create hooks for a [CAROUSEL / VIDEO / TWEET THREAD] that use the 'before/after' format.
+   Topic: [TOPIC]. Audience: [AUDIENCE]."
+
+7. "Write 5 hooks that start with a number or statistic about [TOPIC].
+   Make the stat surprising or counterintuitive."
+
+8. "Give me 5 story-based hooks for [PLATFORM] on [TOPIC].
+   Start each with a scene-setting sentence that puts the reader in the moment."
+
+CAPTIONS & COPY (9-15)
+------------------------
+9. "Write a caption for [PLATFORM] about [TOPIC]. Tone: [CASUAL/PROFESSIONAL/INSPIRING].
+   Include a hook, body, and CTA. Keep it under [X] words."
+
+10. "Write 3 versions of the same caption for [TOPIC]:
+    Short (under 50 words), medium (100-150 words), long (200+ words)."
+
+11. "Write an Instagram caption that sounds like it was written by a human,
+    not by AI. Topic: [TOPIC]. My voice: [DESCRIBE YOUR TONE]."
+
+12. "Take this caption and add more personality to it: [PASTE CAPTION].
+    Don't change the message — just make it sound more like a real person wrote it."
+
+13. "Write a LinkedIn post about [PROFESSIONAL TOPIC] that positions me as a thought leader.
+    Include a hook, 3-5 key points, and a question to drive comments."
+
+14. "Create a TikTok video script (under 60 seconds) for [TOPIC].
+    Structure: Hook, Problem, Solution, CTA. Use short sentences."
+
+15. "Write 3 different CTAs for a post about [TOPIC]. Options:
+    one that asks a question, one that drives profile visits, one that drives saves."
+
+CONTENT STRATEGY (16-22)
+--------------------------
+16. "Give me 20 content ideas for [NICHE] that would perform well on [PLATFORM].
+    For each, write a one-line hook."
+
+17. "Build a 4-week content calendar for [NICHE] on [PLATFORM].
+    Include post topics, formats, and best days to post."
+
+18. "I want to grow on [PLATFORM] in the niche of [NICHE].
+    What are the 5 content pillars I should post about? For each, give 3 specific post ideas."
+
+19. "What type of content gets the most engagement for [NICHE] on [PLATFORM] right now?
+    List 5 formats with examples of each."
+
+20. "I posted about [TOPIC] and it didn't perform well. Here's the post: [PASTE].
+    Diagnose what went wrong and suggest how to improve it."
+
+21. "Give me a content repurposing plan. I'm starting with a [BLOG POST / VIDEO / PODCAST] on [TOPIC].
+    Show me how to turn it into 5 different pieces of content across platforms."
+
+22. "What are the biggest content mistakes people make on [PLATFORM]?
+    Turn each mistake into a lesson I can use to improve my own strategy."
+
+ENGAGEMENT & GROWTH (23-30)
+------------------------------
+23. "Write 10 questions I could post on [PLATFORM] about [NICHE] to drive comments.
+    Questions should be genuinely interesting, not 'What do you think?'"
+
+24. "Write a pinned post / bio section for my [PLATFORM] account.
+    My niche: [NICHE]. My audience: [AUDIENCE]. My unique angle: [ANGLE]."
+
+25. "Help me write replies to these 3 comments on my recent post: [PASTE COMMENTS].
+    Be genuine, not generic. Extend the conversation."
+
+26. "Write a collaboration pitch to a creator in my niche.
+    My account: [DESCRIBE]. Their account: [DESCRIBE]. Proposed collab: [IDEA]."
+
+27. "Create a giveaway announcement caption for [PLATFORM].
+    Prize: [DESCRIBE]. Entry method: [DESCRIBE]. Tone: exciting but clear."
+
+28. "Write a 'story time' post about [EXPERIENCE/LESSON].
+    Start with a hook, build tension, deliver the insight. Platform: [PLATFORM]."
+
+29. "I'm launching [PRODUCT/SERVICE/RESOURCE]. Write a 5-post launch sequence for [PLATFORM].
+    Each post should build anticipation and end with a CTA."
+
+30. "Write a 'behind the scenes' caption showing the process of [WHAT I DO].
+    Make it relatable and personal — not polished."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'resume-cover-letter-prompts': `15 RESUME & COVER LETTER AI PROMPTS
+By DavideGPT — davidegpt.ai
+=====================================
+
+Get interview-ready with AI. These 15 prompts help you write a polished
+resume, tailor cover letters, and stand out from other applicants.
+
+THE 15 PROMPTS
+---------------
+
+RESUME (1-7)
+1. "Here are my job responsibilities from my current role: [PASTE].
+   Rewrite each as achievement-focused bullet points using strong action verbs.
+   Quantify results where possible (even estimated ranges are fine)."
+
+2. "Here is my resume: [PASTE]. Here is the job description: [PASTE].
+   Tell me: what keywords am I missing? What should I emphasise more?
+   What should I cut to better match this role?"
+
+3. "Write a 3-line professional summary for my resume.
+   My background: [PASTE BRIEF DESCRIPTION]. Target role: [JOB TITLE].
+   Make it specific and results-focused — not generic."
+
+4. "I have a gap in my employment from [DATE] to [DATE].
+   Help me write a brief, honest explanation I could include on my CV or use in an interview."
+
+5. "I'm changing careers from [OLD FIELD] to [NEW FIELD].
+   Help me reframe my existing experience to be relevant to the new direction.
+   List the transferable skills and how to position them."
+
+6. "Rewrite this bullet point to be stronger and more specific: [PASTE BULLET].
+   Use the format: [Action verb] + [What I did] + [Result/Impact]."
+
+7. "Review my resume for ATS (Applicant Tracking System) compatibility.
+   Here is my resume: [PASTE]. Here is the job description: [PASTE].
+   What changes should I make to pass automated screening?"
+
+COVER LETTERS (8-12)
+8. "Write a cover letter for [JOB TITLE] at [COMPANY].
+   Job description: [PASTE]. My background: [2-3 SENTENCES].
+   Do NOT start with 'I am writing to apply'.
+   Keep it to 3 short paragraphs. Tone: confident, professional, human."
+
+9. "Here is a cover letter I drafted: [PASTE].
+   Make it more specific and compelling. Remove any generic phrases.
+   The hiring manager's name is [NAME / 'not known']."
+
+10. "Write the opening paragraph of a cover letter that immediately hooks the reader.
+    The role is [JOB TITLE]. Something specific I know about [COMPANY]: [DETAIL]."
+
+11. "Write 3 different closing paragraphs for a cover letter.
+    Each should create a different impression: one confident, one collaborative, one concise."
+
+12. "I'm applying for [ROLE] without meeting all the requirements.
+    I'm missing experience in [AREA]. Write a paragraph addressing this honestly
+    while positioning my transferable strengths."
+
+INTERVIEW PREP (13-15)
+13. "I have an interview for [JOB TITLE] at [COMPANY].
+    Give me the 10 most likely questions. For each, tell me what a strong answer structure looks like."
+
+14. "I need to prepare a 2-minute 'Tell me about yourself' answer for [JOB TITLE].
+    My background: [PASTE]. Help me structure a compelling, concise response."
+
+15. "Here is my answer to 'Tell me about a time you overcame a challenge': [PASTE].
+    Improve it using the STAR method (Situation, Task, Action, Result).
+    Make it more specific and impactful."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'youtube-script-prompts': `25 YOUTUBE SCRIPT PROMPTS THAT HOOK VIEWERS
+By DavideGPT — davidegpt.ai
+==============================================
+
+Never stare at a blank page again. 25 prompts for writing YouTube scripts
+with strong hooks, clear structure, and CTAs that convert.
+
+HOW TO USE THESE PROMPTS
+--------------------------
+The best YouTube scripts have a simple structure:
+Hook (0-30 sec) → Problem or Context → Main Content → CTA
+
+HOOK PROMPTS (1-7)
+--------------------
+1. "Write 5 different hooks for a YouTube video about [TOPIC].
+   Each should work in under 20 seconds. Use: bold statement, story, question, statistic, controversy."
+
+2. "Write a hook for a video titled: [YOUR VIDEO TITLE].
+   Make the viewer feel like they'd be crazy to click away."
+
+3. "Write 3 alternative hooks for this video opener: [PASTE CURRENT HOOK].
+   Make each one more pattern-interrupting than the original."
+
+4. "What are the top 3 mistakes creators make in their YouTube intros?
+   For each mistake, show me how to fix it with an example."
+
+5. "Write a hook for a video about [TOPIC] that uses a surprising statistic
+   or counterintuitive fact to grab attention."
+
+6. "Write a 'mini story' hook under 30 seconds for a video about [TOPIC].
+   Drop the viewer into the middle of a scene, then pull back to context."
+
+7. "My video is about [TOPIC]. Write a hook that addresses a common frustration
+   my target viewer has — make them feel immediately understood."
+
+FULL SCRIPT PROMPTS (8-17)
+----------------------------
+8. "Write a complete YouTube script for a [X-MINUTE] video titled: [TITLE].
+   Target audience: [AUDIENCE]. Key points to cover: [LIST].
+   Include hook, intro, main sections, and CTA."
+
+9. "I want to make a tutorial video about [TOPIC].
+   Structure it as: Problem intro → Why this matters → Step-by-step solution → Common mistakes → CTA.
+   Write the script in a conversational tone, not robotic."
+
+10. "Write the intro script (first 60 seconds) for a video called [TITLE].
+    Include: hook, what the video will cover, and why the viewer should watch to the end."
+
+11. "Write transition phrases between these 3 sections in my video script: [SECTION TITLES].
+    Each transition should feel natural and maintain viewer momentum."
+
+12. "Write a video script comparing [OPTION A] vs [OPTION B] for [AUDIENCE].
+    Include: intro, criteria for comparison, breakdown of each option, verdict, and CTA.
+    Length: [X minutes]."
+
+13. "Write a 'list video' script: [X] Things You Didn't Know About [TOPIC].
+    For each item, write a hook sentence, 2-3 sentences of explanation, and a quick payoff."
+
+14. "I want to do a 'Day in My Life' style video as a [YOUR ROLE].
+    Write a script that shows my routine while naturally weaving in [KEY MESSAGE/LESSON]."
+
+15. "Write a story-based script for a video about [TOPIC/LESSON I LEARNED].
+    Use a narrative arc: setup, challenge, turning point, resolution, takeaway."
+
+16. "Write a video script for [TOPIC] that teaches through 3 real examples or case studies.
+    Make it feel like we're watching this unfold, not just being lectured."
+
+17. "Write a 90-second YouTube Short script about [TOPIC].
+    Hook in first 3 seconds. No fluff. End with a strong punch or takeaway."
+
+CTA & OUTRO PROMPTS (18-22)
+------------------------------
+18. "Write 5 different CTAs for the end of a YouTube video.
+    Include: subscribe CTA, comment CTA, next video CTA, lead magnet CTA, like CTA.
+    Make each feel natural, not forced."
+
+19. "Write an outro script for a video about [TOPIC] that:
+    1. Summarises the key takeaway in 1 sentence
+    2. Asks a specific question in the comments
+    3. Recommends a related video
+    4. Has a natural-sounding subscribe ask"
+
+20. "I want to retain viewers through to the CTA. Write a 'retention hook' I can
+    place at the 40% mark of my video to keep people watching: [VIDEO TOPIC]."
+
+TITLES & THUMBNAILS (21-25)
+-----------------------------
+21. "Write 10 YouTube title options for a video about [TOPIC].
+    Mix: curiosity-driven, how-to, list, controversial, story. Flag your top 3."
+
+22. "Write a description for a YouTube video titled: [TITLE].
+    Include: 2-paragraph summary, timestamps [I'll fill in], and 5 keyword hashtags."
+
+23. "What should the thumbnail for my video [TITLE] show?
+    Give me 3 thumbnail concept options with: image idea, text overlay, and colour scheme."
+
+24. "Improve this YouTube title: [PASTE TITLE]. Give me 5 alternatives that are more
+    click-worthy without being misleading."
+
+25. "Write the first 2 sentences of my video description that will show up in search results
+    for the video: [TITLE]. Include the main keyword naturally."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'sales-persuasion-prompt-pack': `20 SALES & PERSUASION AI PROMPTS
+By DavideGPT — davidegpt.ai
+===================================
+
+Close more deals with AI-crafted sales copy, objection handlers,
+follow-up sequences, and persuasive scripts for any industry.
+
+THE 20 PROMPTS
+---------------
+
+SALES COPY (1-6)
+1. "Write a sales page for [PRODUCT/SERVICE].
+   Target audience: [DESCRIBE]. Main benefit: [BENEFIT]. Price: [$X].
+   Structure: Headline, Problem, Solution, Features, Social Proof, CTA.
+   Tone: direct and benefit-focused, not hype-filled."
+
+2. "Write 5 different sales email subject lines for [PRODUCT/OFFER].
+   Include: curiosity, benefit, urgency, personalisation, question styles.
+   Mark your top choice."
+
+3. "Write a 5-email sales sequence for [PRODUCT/SERVICE].
+   Email 1: Problem awareness. Email 2: Solution teaser. Email 3: Case study.
+   Email 4: Objection buster. Email 5: Final CTA + urgency."
+
+4. "Write a sales landing page headline and subheadline for [PRODUCT/SERVICE].
+   The main benefit is [BENEFIT]. The audience struggles with [PROBLEM].
+   Give me 5 headline options."
+
+5. "Write product bullet points for [PRODUCT/SERVICE] that focus on outcomes,
+   not features. 8 bullets. Start each with an action verb."
+
+6. "Write a sales script for a discovery call about [PRODUCT/SERVICE].
+   Include: opening, qualifying questions, problem exploration, solution presentation, CTA."
+
+OBJECTION HANDLING (7-12)
+7. "A prospect said: 'It's too expensive.' Write 3 different responses that
+   reframe the conversation around value and ROI without being defensive."
+
+8. "A prospect said: 'I need to think about it.' Write a response that
+   creates gentle urgency and identifies what's holding them back."
+
+9. "A prospect said: 'We already use [COMPETITOR].' Write a response that
+   positions [YOUR PRODUCT] as complementary or superior without badmouthing the competitor."
+
+10. "A prospect said: 'I don't have time right now.' Write a response that
+    respects their time while keeping the door open and creating curiosity."
+
+11. "A prospect said: 'We don't have the budget.' Write a response that explores
+    whether budget is a real constraint or an excuse, and offers a path forward."
+
+12. "A prospect said: 'I need to check with my team.' Write a response that
+    helps them advocate internally for your solution."
+
+FOLLOW-UPS (13-17)
+13. "Write a follow-up message for 24 hours after a sales call that didn't close.
+    Summarise the key points, address one concern they raised, and set a clear next step."
+
+14. "Write a follow-up for a prospect who downloaded my free resource [NAME]
+    but hasn't responded to my outreach. Tone: helpful, not salesy."
+
+15. "Write a re-engagement email for a lead who went cold 30 days ago.
+    My product/service is [DESCRIBE]. Make it short, human, and low-pressure."
+
+16. "Write a 'last chance' email for an expiring offer on [PRODUCT/SERVICE].
+    Create urgency without being annoying. Include the deadline clearly."
+
+17. "Write a post-purchase follow-up to upsell [PRODUCT B] to a customer who bought [PRODUCT A].
+    Focus on the logical progression and how it complements what they already have."
+
+TESTIMONIALS & SOCIAL PROOF (18-20)
+18. "I have a happy customer. Write 5 questions I can ask them to get a compelling testimonial
+    that will resonate with potential buyers."
+
+19. "Here is raw feedback from a customer: [PASTE].
+    Turn it into a polished, persuasive testimonial they could approve. Keep it authentic."
+
+20. "Write 3 case study summaries (under 100 words each) based on this customer result: [DESCRIBE RESULT].
+    Format: Client situation, challenge, what we did, result. Keep it specific and credible."
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'midjourney-prompt-pack': `50 MIDJOURNEY PROMPTS FOR CREATORS
+By DavideGPT — davidegpt.ai
+=====================================
+
+Generate stunning AI images with these 50 Midjourney prompts —
+covering portraits, product shots, landscapes, brand visuals, and more.
+
+HOW TO USE THESE PROMPTS
+--------------------------
+Copy any prompt into Midjourney using /imagine [prompt].
+Customise the [BRACKETS] with your specific details.
+Add --ar 16:9 for widescreen, --ar 1:1 for square, --ar 9:16 for vertical/Reels.
+
+PORTRAITS & PEOPLE (1-10)
+---------------------------
+1. "Professional headshot of a [GENDER] entrepreneur, age [X], warm confident smile, studio lighting, clean background, --ar 1:1 --v 6"
+2. "Candid street portrait of a [DESCRIPTION] person in [CITY], golden hour light, film grain, 35mm, cinematic --ar 3:4"
+3. "Creative content creator at desk with dual monitors, neon lighting, dark aesthetic, shallow depth of field --ar 16:9"
+4. "Minimalist LinkedIn profile photo, neutral background, business casual, natural light, approachable expression --ar 1:1"
+5. "Lifestyle photo of a person working from a coffee shop, morning light, latte art, laptop, relaxed atmosphere --ar 3:2"
+6. "Dynamic speaker on stage, spotlight, large audience silhouettes, motivational energy --ar 16:9"
+7. "Author headshot with books, warm home library setting, intellectual but approachable --ar 1:1"
+8. "Personal brand photo: creative professional holding camera, urban setting, autumn, candid --ar 4:5"
+9. "Silhouette of a person standing at a window at sunset, city view, contemplative mood --ar 16:9"
+10. "Teacher/educator in a modern classroom, natural light, welcoming expression, casual professional attire --ar 3:2"
+
+BRAND & PRODUCT (11-20)
+-------------------------
+11. "Luxury product flat lay: [PRODUCT] on marble surface, soft shadows, minimalist, white background --ar 1:1"
+12. "E-commerce product photo: [PRODUCT NAME] on white background, professional studio lighting, multiple angles --ar 1:1"
+13. "Lifestyle product shot: [PRODUCT] in use by person in a natural home setting, warm tones --ar 4:5"
+14. "Skincare product arranged with botanicals and natural elements, pastel colour palette --ar 1:1"
+15. "Tech product on a dark surface with glowing elements, futuristic aesthetic, dramatic lighting --ar 16:9"
+16. "Coffee brand imagery: artisan brew, steam rising, hands wrapped around mug, cozy morning --ar 1:1"
+17. "Book cover mockup: [TITLE] on minimalist background, clean typography, professional --ar 2:3"
+18. "App screenshot mockup on iPhone, gradient background, clean UI, modern design --ar 9:16"
+19. "Fashion brand editorial: outfit flatlay on textured background, natural light, styled accessories --ar 1:1"
+20. "Logo design concept: clean minimal icon for a [TYPE] company, vector style, white background --ar 1:1"
+
+BACKGROUNDS & SCENES (21-30)
+-------------------------------
+21. "Futuristic city skyline at night, neon lights, rain-slicked streets, cyberpunk aesthetic --ar 16:9"
+22. "Cozy home office setup, morning light, plants, minimal clutter, warm tones --ar 16:9"
+23. "Abstract digital background: flowing gradients in [COLOURS], suitable for presentation slide --ar 16:9"
+24. "Mountain landscape at golden hour, dramatic clouds, sweeping vista, photography style --ar 16:9"
+25. "Dark academia aesthetic: old library, candlelight, books, vintage atmosphere --ar 16:9"
+26. "Tropical beach from above, crystal water, white sand, drone perspective --ar 16:9"
+27. "Urban coffee shop interior, brick walls, warm lighting, Sunday morning vibe --ar 16:9"
+28. "Abstract tech background: circuit board patterns, blue and purple tones, glowing --ar 16:9"
+29. "Minimalist white workspace with single plant, flat lay perspective --ar 1:1"
+30. "Vintage film aesthetic street scene in [CITY], grainy, nostalgic, warm tones --ar 3:2"
+
+SOCIAL MEDIA CONTENT (31-40)
+------------------------------
+31. "Instagram reel cover: bold text overlay '[YOUR HOOK]' on bright colourful background, eye-catching --ar 9:16"
+32. "YouTube thumbnail background: dramatic split scene showing before vs after [TRANSFORMATION] --ar 16:9"
+33. "Pinterest-style infographic visual: pastel tones, clean layout, [TOPIC] theme --ar 2:3"
+34. "LinkedIn banner: professional [INDUSTRY] scene, subtle brand colours, wide format --ar 16:5"
+35. "TikTok-style vertical background: bright, high-contrast, bold colour, youthful energy --ar 9:16"
+36. "Quote card background: subtle gradient, minimal, room for text overlay --ar 1:1"
+37. "Story template: dark gradient background with brand colour accents, modern --ar 9:16"
+38. "Podcast cover art: [THEME] visual, bold typography space, professional --ar 1:1"
+39. "Newsletter header banner: [NICHE] visual, wide format, editorial style --ar 3:1"
+40. "Event announcement visual: energetic crowd, stage lights, bold atmosphere --ar 16:9"
+
+CREATIVE & ARTISTIC (41-50)
+-----------------------------
+41. "Surrealist digital art: [SUBJECT] floating in clouds, dreamlike, vivid colours --ar 1:1"
+42. "Watercolour illustration of [SUBJECT], soft edges, artistic, pastel tones --ar 1:1"
+43. "3D render: [OBJECT] made of glass, reflective surface, studio light --ar 1:1"
+44. "Anime-style artwork: [CHARACTER/SCENE] in Studio Ghibli aesthetic --ar 1:1"
+45. "Retro 1980s poster style: [TOPIC] with bold typography, neon on dark --ar 2:3"
+46. "Pixel art scene: [SETTING] in 16-bit game style --ar 16:9"
+47. "Minimalist line art: [SUBJECT] in single continuous line, white background --ar 1:1"
+48. "Oil painting style portrait: [SUBJECT] in the style of classical realism --ar 3:4"
+49. "Paper cut art: [SCENE] with layered paper effect, soft shadow, pastel --ar 1:1"
+50. "Neon sign typography: the words '[YOUR PHRASE]' as a glowing neon sign, dark background --ar 3:2"
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'claude-vs-chatgpt-comparison': `CLAUDE VS CHATGPT: THE HONEST BREAKDOWN
+By DavideGPT — davidegpt.ai
+==========================================
+
+I use both every day. Here's what I've found after testing them extensively
+on real writing, research, coding, and analysis tasks.
+
+THE SHORT ANSWER
+-----------------
+ChatGPT is the Swiss Army knife. Claude is the specialist.
+Most people should use both, for different things.
+
+HEAD-TO-HEAD COMPARISON
+-------------------------
+
+WRITING QUALITY:
+Claude: Better at long-form, nuanced writing. Less likely to sound generic.
+ChatGPT: Better at creative variation and following style guides.
+Winner: Slight edge to Claude for natural-sounding prose.
+
+DOCUMENT ANALYSIS:
+Claude: Can handle 100,000+ words in a single conversation. Better for long docs.
+ChatGPT: Shorter context window on most plans. Good for shorter documents.
+Winner: Claude — not even close for long documents.
+
+REASONING & LOGIC:
+Claude: Strong logical reasoning. Less likely to confidently state wrong answers.
+ChatGPT: Good reasoning, but can be more prone to hallucination.
+Winner: Roughly equal. Claude is slightly more cautious. ChatGPT o1 is very strong.
+
+CODING:
+Claude: Excellent for longer code files and understanding complex codebases.
+ChatGPT: Excellent too, especially with Code Interpreter for running and testing code.
+Winner: Equal at high quality. ChatGPT has more tools (code interpreter, plugins).
+
+RESEARCH (WITH WEB ACCESS):
+ChatGPT: Has built-in web browsing on Plus/Pro.
+Claude: Web access available but less seamlessly integrated.
+Winner: ChatGPT for live research tasks.
+
+FOLLOWING INSTRUCTIONS:
+Claude: Very precise at following complex instructions. Doesn't deviate.
+ChatGPT: Good, but sometimes adds things you didn't ask for.
+Winner: Claude for strict instruction-following.
+
+PRICING:
+Both: ~$20/month for Pro/Plus plans.
+Both have free tiers with limitations.
+Winner: Equal.
+
+WHEN TO USE CLAUDE
+-------------------
+- Analysing long documents (contracts, reports, books)
+- Writing that needs to sound human and specific
+- Tasks where you need zero hallucination risk
+- Complex multi-step reasoning tasks
+- Coding with large codebases
+
+WHEN TO USE CHATGPT
+---------------------
+- Quick research with live web access
+- Creative content with lots of variation
+- Tasks requiring the GPT store custom GPTs
+- Code execution and data analysis
+- Multimodal tasks (images, voice, etc.)
+
+MY RECOMMENDATION
+------------------
+Start with ChatGPT if you're new to AI. It has the best ecosystem and most integrations.
+Add Claude once you're comfortable — especially if you work with long documents.
+
+Both have free tiers. Try them both for a week on your actual work tasks.
+The right tool depends entirely on what you're doing.
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'ai-marketing-strategy-guide': `BUILD YOUR AI MARKETING STRATEGY IN A WEEKEND
+By DavideGPT — davidegpt.ai
+================================================
+
+You don't need an agency. You need a clear strategy and the right AI tools.
+Here's how to build a complete marketing system in two days.
+
+SATURDAY: STRATEGY (4-6 HOURS)
+
+STEP 1: DEFINE YOUR AUDIENCE (1 HOUR)
+Use this prompt to nail your ideal customer:
+"I sell [PRODUCT/SERVICE] to [GENERAL AUDIENCE].
+Help me build a detailed customer persona. Include:
+- Demographics and background
+- Goals and aspirations
+- Pain points and frustrations
+- Where they spend time online
+- What language they use to describe their problem"
+
+Save this output. Every piece of content should speak to this person.
+
+STEP 2: NAIL YOUR MESSAGE (1 HOUR)
+"Based on this customer persona: [PASTE].
+Help me write:
+1. A one-sentence value proposition (under 15 words)
+2. A tagline for my business
+3. The 3 key benefits to lead with
+4. The 3 biggest objections I need to address"
+
+STEP 3: CHOOSE YOUR CHANNELS (30 MIN)
+Don't try to be everywhere. Pick 1-2 channels and do them well.
+Ask ChatGPT: "Given my audience persona [PASTE], which 2 marketing channels should I focus on first and why?"
+
+STEP 4: BUILD YOUR CONTENT PILLARS (1 HOUR)
+"I'm creating content for [TARGET AUDIENCE] about [TOPIC].
+Give me 5 content pillars — recurring themes I should post about.
+For each pillar, give me 5 specific post ideas."
+
+STEP 5: MAP YOUR CUSTOMER JOURNEY (1 HOUR)
+"Map the customer journey for someone who discovers my [BUSINESS TYPE] and becomes a paying customer.
+Include: Awareness → Interest → Consideration → Decision → Retention.
+At each stage, what are they thinking? What content do they need? What action should they take?"
+
+---
+
+SUNDAY: EXECUTION (4-6 HOURS)
+
+STEP 6: WRITE A MONTH OF CONTENT (2 HOURS)
+"Create a 30-day content calendar for [PLATFORM] based on these pillars: [PASTE PILLARS].
+Include: date, topic, format (video/image/text), hook, and post copy."
+
+STEP 7: WRITE YOUR EMAIL WELCOME SEQUENCE (1.5 HOURS)
+"Write a 5-email welcome sequence for new subscribers to my [NICHE] newsletter.
+Email 1: Warm welcome + quick win.
+Email 2: My story + why I started this.
+Email 3: Most valuable free resource.
+Email 4: Common mistakes in [NICHE] + how to avoid them.
+Email 5: Introduce my paid offer (soft pitch)."
+
+STEP 8: BUILD YOUR AD COPY BANK (1 HOUR)
+"Write 5 Facebook/Instagram ad variations for [PRODUCT/SERVICE].
+Mix hooks: problem-focused, result-focused, curiosity, testimonial-style.
+Keep each under 125 words for the primary text."
+
+STEP 9: SET UP TRACKING
+Ask ChatGPT: "What are the 5 most important marketing metrics I should track for a [BUSINESS TYPE]? How do I set up measurement for each?"
+
+TOOLS FOR YOUR AI MARKETING STACK
+------------------------------------
+- ChatGPT or Claude — strategy and copy
+- Canva — design
+- Buffer or Later — scheduling
+- Mailchimp or Beehiiv — email
+- Google Analytics — traffic tracking
+- Hotjar — understanding user behaviour on your site
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'best-free-ai-tools-guide': `THE BEST FREE AI TOOLS FOR BEGINNERS (2026 EDITION)
+By DavideGPT — davidegpt.ai
+======================================================
+
+You don't need to spend money to start using AI effectively.
+These are the best free tools available right now — and what to use them for.
+
+THE ESSENTIAL FREE AI STACK
+-----------------------------
+
+1. CHATGPT FREE (chatgpt.com)
+What it is: The most popular AI assistant in the world
+Free tier: GPT-4o with daily usage limits
+Best for: Writing, answering questions, brainstorming, learning anything
+Limitation: Can hit rate limits quickly; no image generation on free plan
+Verdict: Start here. It's the best all-rounder.
+
+2. CLAUDE FREE (claude.ai)
+What it is: Anthropic's AI — known for smart, nuanced writing
+Free tier: Claude Sonnet with daily limits
+Best for: Writing that needs to sound human, document analysis
+Limitation: Daily message limit can be hit in heavy use
+Verdict: Use alongside ChatGPT. Better for longer writing tasks.
+
+3. PERPLEXITY FREE (perplexity.ai)
+What it is: An AI search engine that cites its sources
+Free tier: Unlimited with some limits on Pro features
+Best for: Research, fact-checking, up-to-date information
+Limitation: Deep research features are Pro only
+Verdict: Best free tool for research. Replace half your Googling with this.
+
+4. GOOGLE GEMINI FREE (gemini.google.com)
+What it is: Google's AI assistant
+Free tier: Gemini 1.5 Flash
+Best for: Google Workspace integration, multimodal tasks (images + text)
+Limitation: Not as strong as ChatGPT/Claude for writing
+Verdict: Use it if you're in the Google ecosystem (Docs, Gmail, etc.)
+
+5. CANVA AI FREE (canva.com)
+What it is: Design platform with built-in AI features
+Free tier: Magic Write, background remover, basic AI features
+Best for: Creating social media graphics, presentations, simple designs
+Limitation: Many AI features gated behind Pro ($15/month)
+Verdict: Best free design tool. Learn Canva basics and the AI saves you hours.
+
+6. OTTER.AI FREE (otter.ai)
+What it is: AI meeting transcription and notes
+Free tier: 300 minutes of transcription/month, 3 imports
+Best for: Recording and summarising meetings, interviews, calls
+Limitation: 300 minutes goes fast in heavy use
+Verdict: Use this for every important meeting. The free tier is generous.
+
+7. NOTION FREE (notion.so)
+What it is: All-in-one workspace with Notion AI add-on
+Free tier: Notion is free; Notion AI is $10/month add-on
+Best for: Notes, knowledge management, project organisation
+Limitation: AI features cost extra
+Verdict: Even without AI, Notion is worth learning. Add AI when you're ready.
+
+8. RUNWAY FREE TIER (runwayml.com)
+What it is: AI video generation and editing
+Free tier: 125 credits to start
+Best for: Short AI video clips, background removal from video
+Limitation: Free credits run out — best for testing
+Verdict: Try it to understand what AI video can do.
+
+9. IDEOGRAM FREE (ideogram.ai)
+What it is: AI image generation with excellent text rendering
+Free tier: 10 free images per day
+Best for: Creating images with text in them (thumbnails, mockups, graphics)
+Limitation: Limited daily generations on free plan
+Verdict: Best free image tool if you need text IN your images.
+
+10. ELEVENLABS FREE (elevenlabs.io)
+What it is: AI voice generation — sounds remarkably human
+Free tier: 10,000 characters/month (~7 minutes of audio)
+Best for: Voiceovers, podcasts, language learning, accessibility
+Limitation: Free tier is very limited
+Verdict: Use the free tier to see what's possible. Worth upgrading if you do audio.
+
+RECOMMENDED FREE STARTER STACK
+---------------------------------
+Day 1: ChatGPT (writing + questions) + Perplexity (research)
+Week 1: Add Claude (for longer writing tasks)
+Week 2: Add Canva AI (for visuals) + Otter (for meetings)
+Month 2: Evaluate what you actually need to pay for
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
+
+  'perplexity-ai-guide': `PERPLEXITY AI: THE SEARCH ENGINE THAT CITES ITS SOURCES
+By DavideGPT — davidegpt.ai
+==========================================================
+
+Perplexity is not ChatGPT. It's an AI search engine — it searches the web
+in real time, gives you a direct answer, AND shows you where it got the information.
+This changes how you do research.
+
+WHY PERPLEXITY IS DIFFERENT
+-----------------------------
+ChatGPT (without browsing): Knowledge cuts off in the past. Can hallucinate.
+Google: Shows you 10 links. You still have to do the reading.
+Perplexity: Searches now. Synthesises the answer. Shows you the sources.
+
+This makes it the best tool for:
+- Research that requires up-to-date information
+- Fact-checking claims
+- Getting a quick, sourced answer on anything
+- Competitive research and market analysis
+- Following news and industry trends
+
+HOW TO GET THE BEST RESULTS
+-----------------------------
+
+1. BE SPECIFIC
+Bad: "What's the best AI tool?"
+Good: "What are the best free AI tools for content creators in 2026, and what does each do best?"
+
+2. ASK FOR SOURCES ON KEY CLAIMS
+After any answer: "What's the source for [SPECIFIC CLAIM]?"
+Perplexity will identify which citation supports it.
+
+3. USE FOCUS MODES
+Click the icons before searching to filter by:
+- Web (general)
+- Academic (research papers)
+- YouTube (video results)
+- Reddit (community opinions)
+- News (recent articles)
+
+4. FOLLOW UP IN THE SAME THREAD
+Perplexity maintains context like ChatGPT.
+"Now compare [OPTION A] and [OPTION B] based on what you just found."
+
+5. USE COLLECTIONS TO SAVE RESEARCH
+Save related searches in a Collection for ongoing projects.
+This is like a research folder that builds over time.
+
+BEST USE CASES
+---------------
+
+MARKET RESEARCH:
+"What are the main competitors in [INDUSTRY] in [COUNTRY]?
+Summarise what each offers and their approximate market position."
+
+FACT-CHECKING:
+"I read that [CLAIM]. Is this accurate? What do credible sources say?"
+
+NEWS MONITORING:
+"What are the most important recent developments in [INDUSTRY/TOPIC]?
+Summarise the last 7 days."
+
+ACADEMIC RESEARCH:
+Switch to "Academic" mode and search:
+"What does recent research say about [TOPIC]? Focus on findings from 2023-2025."
+
+COMPETITIVE INTELLIGENCE:
+"What are customers saying about [COMPETITOR PRODUCT] online?
+Find reviews and community discussions."
+
+PERPLEXITY PRO ($20/MONTH) — WORTH IT?
+-----------------------------------------
+Pro gives you:
+- Unlimited searches
+- Access to more powerful AI models (Claude, GPT-4)
+- More detailed research
+- Image upload for analysis
+
+Worth it if: You do research daily and hit the free limits frequently.
+Skip it if: You use it occasionally for quick fact-checking.
+
+---
+Downloaded from DavideGPT.ai — Follow @DavideGPT for daily AI tips
+`,
 };

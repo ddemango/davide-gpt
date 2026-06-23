@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
             <span className="text-gradient">Real People</span>
           </>
         }
-        description="Join 50,000+ students and creators who've transformed how they work with AI using DavideGPT resources."
+        description="Discover what real people are saying about DavideGPT resources and how they've changed the way they work with AI."
       />
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
